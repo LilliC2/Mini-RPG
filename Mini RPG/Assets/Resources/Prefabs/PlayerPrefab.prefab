@@ -51,18 +51,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1c7a3646ad118478cbf8a34cc396c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: 1
-  health: 10
-  movSpeed: 5
-  defence: 0
-  mana: 0
-  abilityDeck: []
+  playerInfo:
+    attack: 2
+    health: 10
+    movSpeed: 3
+    defence: 0
+    mana: 0
+    alignment: 0
+    combatStyle: 0
+    abilityDeck: []
   drawnAbilityCards: []
   selectedAbilityCard:
     name: 
     description: 
     cooldown: 0
     manaCost: 0
+    rarity: 0
   currentIndex: 0
   currentWeapon:
     attack: 0

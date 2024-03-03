@@ -29,6 +29,7 @@ public class PlayerInputHandler : GameBehaviour
             transform.parent = playerControls.transform;
             transform.position = playerControls.transform.position;
 
+            //if in titlescreen, look at camera
 
         }
 

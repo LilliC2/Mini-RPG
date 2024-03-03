@@ -221,5 +221,5 @@ MonoBehaviour:
   cursorTransform: {fileID: 0}
   canvasRectTransform: {fileID: 0}
   canvas: {fileID: 0}
-  cursorSpeed: 1000
+  cursorSpeed: 350
   padding: 35

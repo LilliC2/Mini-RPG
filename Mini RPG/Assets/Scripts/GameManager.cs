@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     public event System.Action<PlayerInput> PlayerLeftGame;
 
     public UnityEvent event_ChangeActionMap;
+    
 
     public void Awake()
     {
@@ -36,6 +37,7 @@ public class GameManager : Singleton<GameManager>
         joinAction.performed += context => JoinAction(context); //pass context to JoinAction()
         leaveAction.performed += context => LeaveAction(context);
 
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Start is called before the first frame update
@@ -44,6 +46,11 @@ public class GameManager : Singleton<GameManager>
         //have player 1 auto join, no split screen
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        print("Scene loaded");
+
+    }
 
     //Called from PlayerInputManager
     void OnPlayerJoined(PlayerInput playerInput)
@@ -53,15 +60,16 @@ public class GameManager : Singleton<GameManager>
 
         int index = playerInputList.IndexOf(playerInput);
 
-        if(SceneManager.GetActiveScene().name == "Title") _UI.titleScreenUI.PlayerJoinedGame(index);
-        if(SceneManager.GetActiveScene().name == "Assembly") _UI.combatUI.DisplayAbilityDecks();
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            _UI.titleScreenUI.PlayerJoinedGame(index);
+        }
+            if (SceneManager.GetActiveScene().name == "Assembly") _UI.combatUI.DisplayAbilityDecks();
 
 
         if (PlayerJoinedGame != null) //check if anything is subscribed
         {
-            PlayerJoinedGame(playerInput); //be able to send this to anything that wants it
-
-            
+            PlayerJoinedGame(playerInput); //be able to send this to anything that wants it   
         }
     }
     //Called from PlayerInputManager

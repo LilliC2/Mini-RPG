@@ -738,67 +738,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &533128233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 533128235}
-  - component: {fileID: 533128234}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &533128234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533128233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e28202e756d4246aa96bfc82f23c27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sword_AbilityDeck:
-  - name: Dash
-    description: 'Gain a temporary speed boost.  '
-    cooldown: 0
-    manaCost: 0
-  - name: Shield
-    description: Gain a temporary defence boost.
-    cooldown: 0
-    manaCost: 0
-  - name: Shield 2
-    description: Gain a temporary defence boost.
-    cooldown: 0
-    manaCost: 0
-  - name: Shield 3
-    description: Gain a temporary defence boost.
-    cooldown: 0
-    manaCost: 0
---- !u!4 &533128235
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533128233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7150146, y: 0.5658714, z: 0.69874287}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &545952878 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1979833514634715981, guid: f175299400a69d9489787736fbc29d64, type: 3}
@@ -1852,6 +1791,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &3545794380586374112
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5960876225004854482, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_Name
+      value: AbilityDeckManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7150146
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5658714
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.69874287
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8502619107128887535, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1fad882a38e8411409d932952dc4702f, type: 3}
 --- !u!1001 &4372480893077912098
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,4 +16,7 @@ public class PlayerClass
 
     public enum CombatStyles { Priest, Warrior, Mage, Bard, Cleric, Monk, Ranger}
     public CombatStyles combatStyle;
+
+    public AbilityCardClass[] abilityDeck;
+
 }

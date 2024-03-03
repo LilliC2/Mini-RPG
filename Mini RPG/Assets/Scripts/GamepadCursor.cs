@@ -45,11 +45,7 @@ public class GamepadCursor : GameBehaviour
         canvas = FindAnyObjectByType<Canvas>();
         camera = Camera.main;
 
-        if(cursorTransform == null)
-        {
-            cursorTransform = Instantiate(Resources.Load<GameObject>("Prefabs/Mouse"), canvas.transform).GetComponent<RectTransform>();
-
-        }
+        CreateCursor();
 
         if (virtualMouse == null)
         {
@@ -80,6 +76,24 @@ public class GamepadCursor : GameBehaviour
 
     }
 
+    void CreateCursor()
+    {
+        if (cursorTransform == null)
+        {
+            cursorTransform = Instantiate(Resources.Load<GameObject>("Prefabs/Mouse"), canvas.transform).GetComponent<RectTransform>();
+
+        }
+
+        if(canvas == null)
+        {
+            canvas = FindAnyObjectByType<Canvas>();
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+            canvas = FindAnyObjectByType<Canvas>();
+        }
+    }
+
     private void OnDisable()
     {
         InputSystem.onAfterUpdate -= UpdateMotion;
@@ -91,41 +105,46 @@ public class GamepadCursor : GameBehaviour
     //update mouse with device motion
     void UpdateMotion()
     {
-        if(cursorTransform.gameObject.activeSelf)
+        if(_GM.gameState == GameManager.GameState.PlayersInUI)
         {
-
-            if (virtualMouse == null || userGamepad == null)
-                return;
-
-            #region Movement
-            Vector2 stickValue = userGamepad.leftStick.ReadValue();
-            stickValue *= cursorSpeed * Time.deltaTime;
-
-            Vector2 currentPos = virtualMouse.position.ReadValue();
-            Vector2 newPos = currentPos + stickValue;
-
-            //clamp so it doesnt go out of screen
-            newPos.x = Mathf.Clamp(newPos.x, padding, Screen.width - padding);
-            newPos.y = Mathf.Clamp(newPos.y, padding, Screen.height - padding);
-
-            InputState.Change(virtualMouse, newPos);
-            InputState.Change(virtualMouse.delta, stickValue);
-            #endregion
-
-            #region Buttons
-
-            bool aButtonIsPressed = userGamepad.aButton.IsPressed();
-            if (previousMouseState != aButtonIsPressed)
+            if (cursorTransform.gameObject.activeSelf)
             {
-                virtualMouse.CopyState<MouseState>(out var mouseState); //copy current state of mouse
-                mouseState.WithButton(MouseButton.Left, aButtonIsPressed);
-                InputState.Change(virtualMouse, mouseState);
-                previousMouseState = aButtonIsPressed;
-            }
 
-            AnchorCursor(newPos);
-            #endregion
+                if (virtualMouse == null || userGamepad == null)
+                    return;
+
+                #region Movement
+                Vector2 stickValue = userGamepad.leftStick.ReadValue();
+                stickValue *= cursorSpeed * Time.deltaTime;
+
+                Vector2 currentPos = virtualMouse.position.ReadValue();
+                Vector2 newPos = currentPos + stickValue;
+
+                //clamp so it doesnt go out of screen
+                newPos.x = Mathf.Clamp(newPos.x, padding, Screen.width - padding);
+                newPos.y = Mathf.Clamp(newPos.y, padding, Screen.height - padding);
+
+                InputState.Change(virtualMouse, newPos);
+                InputState.Change(virtualMouse.delta, stickValue);
+                #endregion
+
+                #region Buttons
+
+                bool aButtonIsPressed = userGamepad.aButton.IsPressed();
+                if (previousMouseState != aButtonIsPressed)
+                {
+                    virtualMouse.CopyState<MouseState>(out var mouseState); //copy current state of mouse
+                    mouseState.WithButton(MouseButton.Left, aButtonIsPressed);
+                    InputState.Change(virtualMouse, mouseState);
+                    previousMouseState = aButtonIsPressed;
+                }
+
+                AnchorCursor(newPos);
+                #endregion
+            }
         }
+
+
 
 
     }

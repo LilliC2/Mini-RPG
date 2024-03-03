@@ -8,7 +8,6 @@ public class PlayerController : GameBehaviour
 {
     public PlayerClass playerInfo;
 
-    public AbilityCardClass[] abilityDeck;
 
     public AbilityCardClass[] drawnAbilityCards;
 
@@ -49,10 +48,15 @@ public class PlayerController : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         drawnAbilityCards = new AbilityCardClass[3];
 
-        selectedAbilityCard = drawnAbilityCards[0];
         currentIndex = 0;
+
+        if(playerInfo.abilityDeck != null) DrawAbilityCards();
+
+        selectedAbilityCard = drawnAbilityCards[0];
+
 
         transform.position = _GM.spawnPoints[playerNum].transform.position;
 
@@ -112,7 +116,7 @@ public class PlayerController : GameBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            drawnAbilityCards[i] = abilityDeck[Random.Range(0, abilityDeck.Length)];
+            drawnAbilityCards[i] = playerInfo.abilityDeck[Random.Range(0, playerInfo.abilityDeck.Length)];
         }
 
         switch (_GM.playerGameObjList.IndexOf(gameObject))
