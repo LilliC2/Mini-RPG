@@ -1503,6 +1503,9 @@ MonoBehaviour:
   event_ChangeActionMap:
     m_PersistentCalls:
       m_Calls: []
+  event_EnteredCombatScene:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1753873326
 Transform:
   m_ObjectHideFlags: 0
@@ -2008,7 +2011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_AnchorMin.x
@@ -2016,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2056,11 +2059,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 150.1115
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -55.467606
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3945981157122609955, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2080,7 +2083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4638064980796719241, guid: f175299400a69d9489787736fbc29d64, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

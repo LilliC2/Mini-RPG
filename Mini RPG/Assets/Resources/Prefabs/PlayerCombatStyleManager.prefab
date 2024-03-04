@@ -50,6 +50,7 @@ MonoBehaviour:
     movSpeed: 3
     defence: 1
     mana: 15
+    atkSpd: 0.5
     alignment: 0
     combatStyle: 0
     abilityDeck: []
@@ -59,6 +60,7 @@ MonoBehaviour:
     movSpeed: 3
     defence: 5
     mana: 5
+    atkSpd: 0.5
     alignment: 0
     combatStyle: 1
     abilityDeck: []
@@ -68,6 +70,7 @@ MonoBehaviour:
     movSpeed: 3
     defence: 0
     mana: 20
+    atkSpd: 0.5
     alignment: 0
     combatStyle: 2
     abilityDeck: []
@@ -77,6 +80,7 @@ MonoBehaviour:
     movSpeed: 3
     defence: 0
     mana: 15
+    atkSpd: 0.2
     alignment: 0
     combatStyle: 3
     abilityDeck: []
@@ -86,6 +90,7 @@ MonoBehaviour:
     movSpeed: 3
     defence: 3
     mana: 6
+    atkSpd: 0.5
     alignment: 0
     combatStyle: 4
     abilityDeck: []
@@ -95,6 +100,7 @@ MonoBehaviour:
     movSpeed: 4
     defence: 5
     mana: 6
+    atkSpd: 0.2
     alignment: 0
     combatStyle: 5
     abilityDeck: []
@@ -104,6 +110,7 @@ MonoBehaviour:
     movSpeed: 5
     defence: 2
     mana: 10
+    atkSpd: 0.2
     alignment: 0
     combatStyle: 6
     abilityDeck: []

@@ -1071,7 +1071,7 @@ MonoBehaviour:
   event_ChangeActionMap:
     m_PersistentCalls:
       m_Calls: []
-  event_DrawAbilityCards:
+  event_EnteredCombatScene:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &164435948
