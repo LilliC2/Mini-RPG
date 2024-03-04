@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     public event System.Action<PlayerInput> PlayerLeftGame;
 
     public UnityEvent event_ChangeActionMap;
+    public UnityEvent event_EnteredCombatScene;
     
 
     public void Awake()
@@ -50,6 +51,12 @@ public class GameManager : Singleton<GameManager>
     {
         print("Scene loaded");
 
+        if(scene.name.Contains("Combat"))
+        {
+            event_EnteredCombatScene.Invoke();
+
+        }
+
     }
 
     //Called from PlayerInputManager
@@ -64,7 +71,7 @@ public class GameManager : Singleton<GameManager>
         {
             _UI.titleScreenUI.PlayerJoinedGame(index);
         }
-            if (SceneManager.GetActiveScene().name == "Assembly") _UI.combatUI.DisplayAbilityDecks();
+            if (SceneManager.GetActiveScene().name.Contains("Combat")) _UI.combatUI.DisplayAbilityDecks();
 
 
         if (PlayerJoinedGame != null) //check if anything is subscribed

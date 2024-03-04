@@ -26,6 +26,7 @@ public class CombatUI : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _GM.event_EnteredCombatScene.AddListener(DisplayAbilityDecks);
         DisplayAbilityDecks();
     }
 

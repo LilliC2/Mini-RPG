@@ -49,7 +49,7 @@ public class UIManager : Singleton<UIManager>
 
     public void LoadScene(string sceneName)
     {
-        if (sceneName == "Assembly") _GM.gameState = GameManager.GameState.Combat;
+        if (sceneName.Contains("Combat")) _GM.gameState = GameManager.GameState.Combat;
         SceneManager.LoadScene(sceneName);
 
     }

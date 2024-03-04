@@ -8,6 +8,9 @@ public class TitleScreenUI : GameBehaviour
     [SerializeField]
     AbiltyDecks abilityDecks;
 
+    [SerializeField]
+    CombatStyleStats combatStyleStats;
+
     int combatStyleCount_P1 = 0;
     int combatStyleCount_P2 = 0;
     int combatStyleCount_P3 = 0;
@@ -148,15 +151,92 @@ public class TitleScreenUI : GameBehaviour
 
                 //set ability deck
                 P1.playerInfo.abilityDeck = GetAbilityDeck(P1.playerInfo.combatStyle);
+                SetBaseStats(playerNum); //set stats to base for that combat style
 
                 //add avatar stuff here
 
                 break;
         }
 
-        if (CheckIfAllPlayersAreReady()) _UI.LoadScene("Assembly");
+        if (CheckIfAllPlayersAreReady()) _UI.LoadScene("Assembly_Combat");
     }
 
+    /// <summary>
+    /// Assign base stats according to chosen combat style
+    /// </summary>
+    /// <param name="playerNum"></param>
+    void SetBaseStats(int playerNum)
+    {
+        var playerInfo = _GM.playerGameObjList[playerNum].GetComponent<PlayerController>().playerInfo;
+
+        switch (playerInfo.combatStyle)
+        {
+            case PlayerClass.CombatStyles.Priest:
+
+                playerInfo.attack = combatStyleStats.priest_stats.attack;
+                playerInfo.defence = combatStyleStats.priest_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.priest_stats.movSpeed;
+                playerInfo.health = combatStyleStats.priest_stats.health;
+                playerInfo.mana = combatStyleStats.priest_stats.mana;
+
+                break;
+            case PlayerClass.CombatStyles.Warrior:
+
+
+                playerInfo.attack = combatStyleStats.warrior_stats.attack;
+                playerInfo.defence = combatStyleStats.warrior_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.warrior_stats.movSpeed;
+                playerInfo.health = combatStyleStats.warrior_stats.health;
+                playerInfo.mana = combatStyleStats.warrior_stats.mana;
+
+                break;
+            case PlayerClass.CombatStyles.Mage:
+                playerInfo.attack = combatStyleStats.mage_stats.attack;
+                playerInfo.defence = combatStyleStats.mage_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.mage_stats.movSpeed;
+                playerInfo.health = combatStyleStats.mage_stats.health;
+                playerInfo.mana = combatStyleStats.mage_stats.mana;
+                break;
+            case PlayerClass.CombatStyles.Bard:
+                playerInfo.attack = combatStyleStats.bard_stats.attack;
+                playerInfo.defence = combatStyleStats.bard_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.bard_stats.movSpeed;
+                playerInfo.health = combatStyleStats.bard_stats.health;
+                playerInfo.mana = combatStyleStats.bard_stats.mana;
+                break;
+            case PlayerClass.CombatStyles.Cleric:
+                playerInfo.attack = combatStyleStats.cleric_stats.attack;
+                playerInfo.defence = combatStyleStats.cleric_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.cleric_stats.movSpeed;
+                playerInfo.health = combatStyleStats.cleric_stats.health;
+                playerInfo.mana = combatStyleStats.cleric_stats.mana;
+                break;
+            case PlayerClass.CombatStyles.Monk:
+                playerInfo.attack = combatStyleStats.monk_stats.attack;
+                playerInfo.defence = combatStyleStats.monk_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.monk_stats.movSpeed;
+                playerInfo.health = combatStyleStats.monk_stats.health;
+                playerInfo.mana = combatStyleStats.monk_stats.mana;
+                break;
+            case PlayerClass.CombatStyles.Ranger:
+                playerInfo.attack = combatStyleStats.ranger_stats.attack;
+                playerInfo.defence = combatStyleStats.ranger_stats.defence;
+                playerInfo.movSpeed = combatStyleStats.ranger_stats.movSpeed;
+                playerInfo.health = combatStyleStats.ranger_stats.health;
+                playerInfo.mana = combatStyleStats.ranger_stats.mana;
+                break;
+
+
+        }
+
+
+    }
+
+    /// <summary>
+    /// Return ability deck according to chosen combat style
+    /// </summary>
+    /// <param name="combatStyle"></param>
+    /// <returns></returns>
     AbilityCardClass[] GetAbilityDeck(PlayerClass.CombatStyles combatStyle)
     {
         switch(combatStyle)
@@ -182,6 +262,10 @@ public class TitleScreenUI : GameBehaviour
 
     }
 
+    /// <summary>
+    /// Check number of ready players against number of players
+    /// </summary>
+    /// <returns></returns>
     bool  CheckIfAllPlayersAreReady()
     {
         int readyCount = 0;

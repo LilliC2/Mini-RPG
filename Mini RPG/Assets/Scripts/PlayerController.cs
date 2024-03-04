@@ -16,6 +16,8 @@ public class PlayerController : GameBehaviour
     public WeaponClass currentWeapon;
 
     bool buttonCooldown;
+    bool hasAttacked;
+    bool attackIsHeld;
 
     [SerializeField]
     Health healthScript;
@@ -32,6 +34,8 @@ public class PlayerController : GameBehaviour
 
     private void Awake()
     {
+        _GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
+
         healthScript.InitilizeHealth(playerInfo.health, playerInfo.defence);
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
@@ -52,8 +56,6 @@ public class PlayerController : GameBehaviour
         drawnAbilityCards = new AbilityCardClass[3];
 
         currentIndex = 0;
-
-        if(playerInfo.abilityDeck != null) DrawAbilityCards();
 
         selectedAbilityCard = drawnAbilityCards[0];
 
@@ -78,6 +80,25 @@ public class PlayerController : GameBehaviour
         #region Rotate Player
 
         #endregion
+
+        #region Attack
+        if(attackIsHeld)
+        {
+            if (currentWeapon != null)
+            {
+                if (!hasAttacked)
+                {
+                    hasAttacked = true;
+                    anim.SetTrigger("Attack");
+                    ExecuteAfterSeconds(playerInfo.atkSpd, () => hasAttacked = false);
+                }
+            }
+        }
+
+
+        #endregion
+
+
     }
 
     void ApplyParalysis(float duration)
@@ -101,7 +122,10 @@ public class PlayerController : GameBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if (currentWeapon != null) anim.SetTrigger("Attack");
+        if (context.performed) attackIsHeld = true;
+        if (context.canceled) attackIsHeld = false;
+
+        
     }
 
     public void DestroyPlayer()
@@ -114,6 +138,8 @@ public class PlayerController : GameBehaviour
 
     public void DrawAbilityCards()
     {
+        print("Draw cards");
+
         for (int i = 0; i < 3; i++)
         {
             drawnAbilityCards[i] = playerInfo.abilityDeck[Random.Range(0, playerInfo.abilityDeck.Length)];
