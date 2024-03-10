@@ -32,6 +32,8 @@ public class GamepadCursor : GameBehaviour
     {
         canvas = FindAnyObjectByType<Canvas>();
 
+        _GM.event_newMap.AddListener(CreateCursor);
+
         canvasRectTransform = canvas.GetComponent<RectTransform>();
         camera = Camera.main;
     }
@@ -78,20 +80,24 @@ public class GamepadCursor : GameBehaviour
 
     void CreateCursor()
     {
+
+        if (canvas == null)
+        {
+            canvas = FindAnyObjectByType<Canvas>();
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+            canvas = FindAnyObjectByType<Canvas>();
+        }
+
+        print("create new cursor");
         if (cursorTransform == null)
         {
             cursorTransform = Instantiate(Resources.Load<GameObject>("Prefabs/Mouse"), canvas.transform).GetComponent<RectTransform>();
 
         }
 
-        if(canvas == null)
-        {
-            canvas = FindAnyObjectByType<Canvas>();
-            canvasRectTransform = canvas.GetComponent<RectTransform>();
-
-            canvasRectTransform = canvas.GetComponent<RectTransform>();
-            canvas = FindAnyObjectByType<Canvas>();
-        }
+ 
     }
 
     private void OnDisable()

@@ -156,9 +156,51 @@ public class TitleScreenUI : GameBehaviour
                 //add avatar stuff here
 
                 break;
+            
+            case 1:
+
+                var P2 = _GM.playerGameObjList[playerNum].GetComponent<PlayerController>();
+                P2.playerInfo.combatStyle = (PlayerClass.CombatStyles)(combatStyleCount_P2);
+                playersReady[playerNum] = true;
+
+                //set ability deck
+                P2.playerInfo.abilityDeck = GetAbilityDeck(P2.playerInfo.combatStyle);
+                SetBaseStats(playerNum); //set stats to base for that combat style
+
+                //add avatar stuff here
+
+                break;
+            
+            case 2:
+
+                var P3 = _GM.playerGameObjList[playerNum].GetComponent<PlayerController>();
+                P3.playerInfo.combatStyle = (PlayerClass.CombatStyles)(combatStyleCount_P3);
+                playersReady[playerNum] = true;
+
+                //set ability deck
+                P3.playerInfo.abilityDeck = GetAbilityDeck(P3.playerInfo.combatStyle);
+                SetBaseStats(playerNum); //set stats to base for that combat style
+
+                //add avatar stuff here
+
+                break;
+            
+            case 3:
+
+                var P4 = _GM.playerGameObjList[playerNum].GetComponent<PlayerController>();
+                P4.playerInfo.combatStyle = (PlayerClass.CombatStyles)(combatStyleCount_P4);
+                playersReady[playerNum] = true;
+
+                //set ability deck
+                P4.playerInfo.abilityDeck = GetAbilityDeck(P4.playerInfo.combatStyle);
+                SetBaseStats(playerNum); //set stats to base for that combat style
+
+                //add avatar stuff here
+
+                break;
         }
 
-        if (CheckIfAllPlayersAreReady()) _UI.LoadScene("Assembly_Combat");
+        if (CheckIfAllPlayersAreReady()) _UI.LoadScene("Map");
     }
 
     /// <summary>

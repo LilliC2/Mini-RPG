@@ -18,6 +18,8 @@ public class GameManager : Singleton<GameManager>
     public  InputAction joinAction;
     public InputAction leaveAction;
 
+    public int mapCounter; //number of maps the players have traversed
+
 
     //events
     public event System.Action<PlayerInput> PlayerJoinedGame;
@@ -25,11 +27,12 @@ public class GameManager : Singleton<GameManager>
 
     public UnityEvent event_ChangeActionMap;
     public UnityEvent event_EnteredCombatScene;
+    public UnityEvent event_newMap;
     
 
     public void Awake()
     {
-
+        mapCounter = 0;
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
 
         joinAction.Enable();
@@ -55,6 +58,10 @@ public class GameManager : Singleton<GameManager>
         {
             event_EnteredCombatScene.Invoke();
 
+        }
+        else
+        {
+            event_newMap.Invoke();
         }
 
     }
