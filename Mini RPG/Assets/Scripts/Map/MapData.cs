@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class MapData : MonoBehaviour
 {
+    public bool hasMapBeenGenerated;
+
     public static MapData Instance;
+
+    public GameObject[,] mapLocations;
+
+    public GameObject currentPartyLocation;
+
 
     private void Awake()
     {

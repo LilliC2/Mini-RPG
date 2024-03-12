@@ -57,6 +57,7 @@ public class GameManager : Singleton<GameManager>
         if(scene.name.Contains("Combat"))
         {
             event_EnteredCombatScene.Invoke();
+            event_ChangeActionMap.Invoke();
 
         }
         else

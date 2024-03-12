@@ -14,4 +14,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Map.unity
     guid: ba3554b3789680d41b0a00bc53d7f5ce
+  - enabled: 1
+    path: Assets/Resources/LevelScenes/Forest/Forest_Combat_0.unity
+    guid: a20aef506cc01274eba6f1d03bb86648
+  - enabled: 1
+    path: Assets/Resources/LevelScenes/Forest/Forest_MiniBoss_0.unity
+    guid: 8467ef6e71297b54f8b6480425c149a7
+  - enabled: 1
+    path: Assets/Resources/LevelScenes/Forest/Forest_Rest_0.unity
+    guid: 154a1cdea2dcb7e4789fea85927ce8f3
+  - enabled: 1
+    path: Assets/Resources/LevelScenes/Forest/Forest_Shop_0.unity
+    guid: 04fff4077884b5e4f8ad483df2240db5
+  - enabled: 1
+    path: Assets/Resources/LevelScenes/Forest/Forest_Story_0.unity
+    guid: 91807fc0b8f126746b238e961210804a
+  - enabled: 1
+    path: Assets/Scenes/UI.unity
+    guid: 52aadeae5e6187c46bc31a1e7c84793b
   m_configObjects: {}

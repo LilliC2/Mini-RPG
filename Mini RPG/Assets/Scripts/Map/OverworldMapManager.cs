@@ -8,6 +8,8 @@ using UnityEditor;
 public class OverworldMapManager : GameBehaviour
 {
 
+    public GameObject levelRoot; //holds everything visual in the level, this is so we can keep all the level data when we additivly load another level
+
     Camera Camera;
     MapData mapData;
     SceneDatabase sceneDatabase;
@@ -23,7 +25,7 @@ public class OverworldMapManager : GameBehaviour
     [SerializeField]
     GameObject[,] mapLocations;
 
-    GameObject currentPartyLocation;
+    public GameObject currentPartyLocation;
     [SerializeField]
     GameObject partyHolder;
 
@@ -42,7 +44,15 @@ public class OverworldMapManager : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateMap();
+        //check if there is map data currently saved
+        if(!mapData.hasMapBeenGenerated)
+        {
+            GenerateMap();
+        }
+        else
+        {
+            LoadMap();
+        }
 
     }
 
@@ -86,13 +96,16 @@ public class OverworldMapManager : GameBehaviour
     public void SetPartyLocationOnLoad()
     {
         partyHolder.transform.position = currentPartyLocation.transform.position;
-        foreach (var player in _GM.playerGameObjList)
-        {
-            player.transform.SetParent(partyHolder.transform);
-        }
+
         var parent =  partyHolder.transform;
 
         ArrangeChildren(parent);
+
+        for (int i = 0; i < _GM.playerGameObjList.Count; i++)
+        {
+            _GM.playerGameObjList[i].transform.position = parent.GetChild(i).transform.position;
+        }
+
     }
 
     private void OnEnable()
@@ -102,7 +115,6 @@ public class OverworldMapManager : GameBehaviour
 
     private void OnDisable()
     {
-        partyHolder.transform.DetachChildren();
     }
 
 
@@ -123,6 +135,7 @@ public class OverworldMapManager : GameBehaviour
     {
         GameObject boss;
         _GM.mapCounter++;
+        mapData.hasMapBeenGenerated = true;
 
         //first location is a spawn
 
@@ -137,7 +150,7 @@ public class OverworldMapManager : GameBehaviour
 
         Vector3 spawn = GameObject.Find("Spawn").gameObject.transform.position;
 
-        mapLocations[0, 0] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_Spawn"),spawn,Quaternion.identity);
+        mapLocations[0, 0] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_Spawn"),spawn,Quaternion.identity, levelRoot.transform);
 
         #region Generate Event Spots
 
@@ -149,7 +162,7 @@ public class OverworldMapManager : GameBehaviour
                 string eventSpotType = GenerateEventSpotType();
                 print(eventSpotType + " at " + row + ", " + col);
 
-                var spot = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_" + eventSpotType));
+                var spot = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_" + eventSpotType),levelRoot.transform);
                 mapLocations[row, col] = spot;
                 //give it a scene based on event type and map theme
 
@@ -157,8 +170,9 @@ public class OverworldMapManager : GameBehaviour
                 //NOT DYNAMICS
                 string fileDir = "LevelScenes/" + mapTheme + "/" + mapTheme + "_" + eventSpotType + "_" + 0;
                 print(fileDir);
-                string scene = Resources.Load<SceneAsset>(fileDir).name;
+                Scene scene = SceneManager.GetSceneByName(mapTheme + "_" + eventSpotType + "_" + 0);//Resources.Load<SceneAsset>(fileDir);
                 spot.GetComponent<EventSpot>().scene = scene;
+                spot.GetComponent<EventSpot>().sceneName = mapTheme + "_" + eventSpotType + "_" + 0;
                 spot.GetComponent<EventSpot>().levelName = fileDir;
                 spot.GetComponent<EventSpot>().eventType = eventSpotType;
 
@@ -174,7 +188,7 @@ public class OverworldMapManager : GameBehaviour
 
 
             //grand boss
-            mapLocations[0, numOfcol] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_BigBoss"));
+            mapLocations[0, numOfcol] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_BigBoss"),levelRoot.transform);
             boss = mapLocations[0, numOfcol];
         }
         else
@@ -182,7 +196,7 @@ public class OverworldMapManager : GameBehaviour
             print("Mini Boss at 0, " + (numOfcol).ToString());
 
             //mini boss
-            mapLocations[0, numOfcol] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_MiniBoss"));
+            mapLocations[0, numOfcol] = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_MiniBoss"), levelRoot.transform);
             boss = mapLocations[0, numOfcol];
 
         }
@@ -275,7 +289,7 @@ public class OverworldMapManager : GameBehaviour
                             print("Adding line from origin to " + mapLocations[locationNextCol, col + 1].name + " at " + row + ", " + col + 1);
 
                             //create obj to hold line render
-                            GameObject lineHolder = Instantiate(Resources.Load<GameObject>("MapEventSpots/LineHolder"));
+                            GameObject lineHolder = Instantiate(Resources.Load<GameObject>("MapEventSpots/LineHolder"), levelRoot.transform);
                             lineHolder.transform.SetParent(origin.transform);
                             var line = lineHolder.GetComponent<LineRenderer>();
                             lineRenderers.Add(line);
@@ -354,6 +368,8 @@ public class OverworldMapManager : GameBehaviour
         SetPartyLocationOnLoad();
 
         overworldMapUI.SetOptions(currentPartyLocation);
+
+        SaveMap();
     }
 
     bool CheckDistanceBetweenOtherEventSpots(Vector3 origin, int colLength, int rowLength)
@@ -410,25 +426,27 @@ public class OverworldMapManager : GameBehaviour
     /// <summary>
     /// Save current map data using data persistance before travelling to new scene
     /// </summary>
-    void SaveMap()
+    public void SaveMap()
     {
+        print("Saved Map");
+        mapData.mapLocations = mapLocations;
+        mapData.currentPartyLocation = currentPartyLocation;
+
 
     }
 
-    /// <summary>
-    /// Save current player position using data persistance before travelling to new scene
-    /// </summary>
-    void SavePlayersLocation()
-    {
-
-    }
 
     /// <summary>
     /// Load map based on saved data
     /// </summary>
     void LoadMap()
     {
+        print("Load Map");
         //load map
+        foreach (var item in mapData.mapLocations)
+        {
+            print(item.name);
+        }
 
         //move players to correct location
     }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OverworldMapUI : GameBehaviour
 {
+    OverworldMapManager overworldMapManager;
+
     [SerializeField]
     GameObject[] optionUIGO;
 
@@ -38,7 +41,7 @@ public class OverworldMapUI : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        overworldMapManager = FindAnyObjectByType<OverworldMapManager>();
         optionSelectedByPlayer = new int[_GM.playerGameObjList.Count];
         hasPlayerVoted = new bool[_GM.playerGameObjList.Count];
 
@@ -367,7 +370,7 @@ public class OverworldMapUI : GameBehaviour
             //one winner
             if (highestVoteOptions.Count == 1)
             {
-                selectedOptionGO = eventSpotOptions[0];
+                selectedOptionGO = eventSpotOptions[highestVoteOptions[0]];
             }
             else
             {
@@ -375,14 +378,43 @@ public class OverworldMapUI : GameBehaviour
             }
             print("Winner is " + selectedOptionGO.name);
 
-            string sceneName = selectedOptionGO.GetComponent<EventSpot>().scene;
-            print(sceneName);
-            _UI.LoadScene(sceneName); 
+            string sceneName = selectedOptionGO.GetComponent<EventSpot>().sceneName;
+
+            //change current party location on map
+            overworldMapManager.currentPartyLocation = selectedOptionGO;
+            overworldMapManager.SaveMap();
+
+            StartCoroutine(LoadSceneAdditvly(sceneName));
+            
 
         }
         else print("Not evreyone has voted");
 
 
+
+    }
+
+    IEnumerator LoadSceneAdditvly(string scene)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
+
+        }
+        if(asyncOperation.isDone)
+        {
+            print("change active scene");
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(scene));
+            overworldMapManager.levelRoot.SetActive(false);
+        }
+
+        //var currentScene = SceneManager.GetActiveScene();
+
+        //SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+
+        //SceneManager.SetActiveScene()
 
     }
 

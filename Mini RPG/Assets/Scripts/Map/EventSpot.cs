@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 public class EventSpot : GameBehaviour
 {
     public string levelName;
+    public string sceneName;
     public string eventType;
 
     public List<GameObject> connections;
-    public string scene;
+    public Scene scene;
 
     public bool entry;
     public bool exit;
