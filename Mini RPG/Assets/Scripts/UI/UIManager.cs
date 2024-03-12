@@ -9,10 +9,12 @@ public class UIManager : Singleton<UIManager>
 {
     public TitleScreenUI titleScreenUI;
     public CombatUI combatUI;
+    public OverworldMapUI overworldMapUI;
 
     private void Awake()
     {
         _GM.event_ChangeActionMap.AddListener(ToggleCursors);
+        _GM.event_newMap.AddListener(GetScripts);
     }
 
 
@@ -41,10 +43,16 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    private void OnEnable()
+    void GetScripts()
     {
         titleScreenUI = FindAnyObjectByType<TitleScreenUI>();
         combatUI = FindAnyObjectByType<CombatUI>();
+        overworldMapUI = FindAnyObjectByType<OverworldMapUI>();
+    }
+
+    private void OnEnable()
+    {
+        GetScripts();
     }
 
     public void LoadScene(string sceneName)

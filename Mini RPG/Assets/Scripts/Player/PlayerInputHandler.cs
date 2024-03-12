@@ -17,6 +17,8 @@ public class PlayerInputHandler : GameBehaviour
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
+
         _GM.event_ChangeActionMap.AddListener(ChangeActionMap);
 
         if (playerPrefab != null)
@@ -44,6 +46,13 @@ public class PlayerInputHandler : GameBehaviour
                 playerInput.currentActionMap = playerInput.actions.FindActionMap("UI");
 
                 break;
+                
+            case GameManager.GameState.OverworldMap:
+                print("Change to UI");
+                print(playerInput.name);
+                playerInput.currentActionMap = playerInput.actions.FindActionMap("UI");
+
+                break;
 
             default:
                 playerInput.currentActionMap = playerInput.actions.FindActionMap("Gameplay");
@@ -52,6 +61,7 @@ public class PlayerInputHandler : GameBehaviour
         }
     }
 
+    #region Combat Action Map
     public void Attack(InputAction.CallbackContext context)
     {
         playerControls.Attack(context);
@@ -66,7 +76,6 @@ public class PlayerInputHandler : GameBehaviour
     {
         playerControls.ChangeSelectedAbility(+1);
     }
-
 
     public void OnLook(InputAction.CallbackContext context)
     {
@@ -87,6 +96,33 @@ public class PlayerInputHandler : GameBehaviour
                 break;
         }
     }
+
+    #endregion
+
+    #region UI Action Map
+    public void SelectOptionL()
+    {
+        _UI.overworldMapUI.ChangePlayerOptionChoice(-1, _GM.playerGameObjList.IndexOf(transform.parent.gameObject));
+    }
+    
+    public void SelectOptionR()
+    {
+        _UI.overworldMapUI.ChangePlayerOptionChoice(+1, _GM.playerGameObjList.IndexOf(transform.parent.gameObject));
+
+    }
+
+    public void Confirm()
+    {
+        _UI.overworldMapUI.ConfirmPlayerOptionChoice(_GM.playerGameObjList.IndexOf(transform.parent.gameObject));
+    }
+
+    public void Back()
+    {
+        _UI.overworldMapUI.RevokePlayerOptionChoice(_GM.playerGameObjList.IndexOf(transform.parent.gameObject));
+
+    }
+
+    #endregion
 
 
 

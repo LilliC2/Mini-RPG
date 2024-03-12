@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEditor;
+
 
 public class OverworldMapManager : GameBehaviour
 {
 
     Camera Camera;
     MapData mapData;
+    SceneDatabase sceneDatabase;
+    OverworldMapUI overworldMapUI;
 
     public string mapTheme; //different for each overworld map scene
 
@@ -24,11 +29,14 @@ public class OverworldMapManager : GameBehaviour
 
     private void Awake()
     {
+        _GM.gameState = GameManager.GameState.OverworldMap;
         Camera = Camera.main;
         mapData = FindAnyObjectByType<MapData>();
+        overworldMapUI = FindAnyObjectByType<OverworldMapUI>();
+        sceneDatabase = GetComponent<SceneDatabase>();
 
         _GM.event_newMap.AddListener(SetPartyLocationOnLoad);
-
+        _GM.event_ChangeActionMap.Invoke();
     }
 
     // Start is called before the first frame update
@@ -136,18 +144,23 @@ public class OverworldMapManager : GameBehaviour
         for (int col = 1; col < numOfcol; col++)
         {
             
-
             for (int row = 0; row < numOfRow; row++)
             {
-                string mapType = GenerateEventSpotType();
-                print(mapType + " at " + row + ", " + col);
+                string eventSpotType = GenerateEventSpotType();
+                print(eventSpotType + " at " + row + ", " + col);
 
-                var spot = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_" + mapType));
+                var spot = Instantiate(Resources.Load<GameObject>("MapEventSpots/EventSpot_" + eventSpotType));
                 mapLocations[row, col] = spot;
-                //Instantiate(Resources.Load<GameObject>("Prefabs/LevelScenes/" +
-                //mapTheme + "/" + GenerateEventSpotType() + Random.Range(0, 1).ToString()));
+                //give it a scene based on event type and map theme
 
 
+                //NOT DYNAMICS
+                string fileDir = "LevelScenes/" + mapTheme + "/" + mapTheme + "_" + eventSpotType + "_" + 0;
+                print(fileDir);
+                string scene = Resources.Load<SceneAsset>(fileDir).name;
+                spot.GetComponent<EventSpot>().scene = scene;
+                spot.GetComponent<EventSpot>().levelName = fileDir;
+                spot.GetComponent<EventSpot>().eventType = eventSpotType;
 
             }
         }
@@ -174,9 +187,6 @@ public class OverworldMapManager : GameBehaviour
 
         }
         #endregion
-
-        //put maplocations in correct pos in scene
-
 
         //generate location for events on map
         #region Place Event Spots on Map
@@ -343,6 +353,7 @@ public class OverworldMapManager : GameBehaviour
         currentPartyLocation = mapLocations[0, 0];
         SetPartyLocationOnLoad();
 
+        overworldMapUI.SetOptions(currentPartyLocation);
     }
 
     bool CheckDistanceBetweenOtherEventSpots(Vector3 origin, int colLength, int rowLength)

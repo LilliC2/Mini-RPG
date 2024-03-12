@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
-    public enum GameState { PlayersInUI, Combat, Story, Shop, Rest}
+    public enum GameState { PlayersInUI, Combat, Story, Shop, Rest, OverworldMap}
     public GameState gameState;
 
     public GameObject[] spawnPoints;

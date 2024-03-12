@@ -341,6 +341,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Option L",
+                    "type": "Value",
+                    "id": "8da850c9-dddf-4170-9bdd-368bbfaf60c8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Option R",
+                    "type": "Button",
+                    "id": "1f5d4ba0-61f2-46a5-b9b8-0257a1a705c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -358,10 +376,21 @@
                 {
                     "name": "",
                     "id": "7e36a0c2-f48e-41a1-9372-c09cb2aeda91",
-                    "path": "",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d438b96b-32a8-4ac0-8b18-bcd7c52570c2",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB + M",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -495,6 +524,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24ca0dab-b82e-4b6b-8089-3dbfedfbfd31",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Option L",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2994b5c6-31d2-4b69-8ca9-a1f4053d8d9b",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB + M",
+                    "action": "Option L",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c5e28d4-fcd0-4f5d-914f-bcd3823a2a8b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Option R",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6155826f-5339-4c90-a3bd-757a1af91632",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB + M",
+                    "action": "Option R",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e54196e-91fb-4f35-b5da-28b8be532b01",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47ebc177-7583-438b-865a-43638bcb26ac",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KB + M",
+                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
