@@ -13,7 +13,6 @@ public class OverworldMapManager : GameBehaviour
     Camera Camera;
     MapData mapData;
     SceneDatabase sceneDatabase;
-    OverworldMapUI overworldMapUI;
 
     public string mapTheme; //different for each overworld map scene
 
@@ -34,7 +33,6 @@ public class OverworldMapManager : GameBehaviour
         _GM.gameState = GameManager.GameState.OverworldMap;
         Camera = Camera.main;
         mapData = FindAnyObjectByType<MapData>();
-        overworldMapUI = FindAnyObjectByType<OverworldMapUI>();
         sceneDatabase = GetComponent<SceneDatabase>();
 
         _GM.event_newMap.AddListener(SetPartyLocationOnLoad);
@@ -51,7 +49,6 @@ public class OverworldMapManager : GameBehaviour
         }
         else
         {
-            LoadMap();
         }
 
     }
@@ -367,7 +364,7 @@ public class OverworldMapManager : GameBehaviour
         currentPartyLocation = mapLocations[0, 0];
         SetPartyLocationOnLoad();
 
-        overworldMapUI.SetOptions(currentPartyLocation);
+        _UI.overworldMapUI.SetOptions(currentPartyLocation);
 
         SaveMap();
     }
@@ -439,15 +436,5 @@ public class OverworldMapManager : GameBehaviour
     /// <summary>
     /// Load map based on saved data
     /// </summary>
-    void LoadMap()
-    {
-        print("Load Map");
-        //load map
-        foreach (var item in mapData.mapLocations)
-        {
-            print(item.name);
-        }
 
-        //move players to correct location
-    }
 }

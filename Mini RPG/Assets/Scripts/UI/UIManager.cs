@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
+
+    public GameObject[] uiOverlays;
+
     public TitleScreenUI titleScreenUI;
     public CombatUI combatUI;
     public OverworldMapUI overworldMapUI;
@@ -14,8 +17,30 @@ public class UIManager : Singleton<UIManager>
     private void Awake()
     {
         _GM.event_ChangeActionMap.AddListener(ToggleCursors);
-        _GM.event_newMap.AddListener(GetScripts);
+        _GM.event_LoadedNewScene.AddListener(ChangeUIOverlay);
+        _GM.event_LoadedNewScene.AddListener(GetScripts);
+        GetScripts();
+        ChangeUIOverlay();
     }
+
+    public void ChangeUIOverlay()
+    {
+        var sceneName = SceneManager.GetActiveScene().name;
+
+        int indexSetScene = -1;
+
+        if (sceneName.Contains("Title")) indexSetScene =0;
+        if (sceneName.Contains("Map")) indexSetScene = 1;
+        if (sceneName.Contains("Combat")) indexSetScene = 2;
+
+        for (int i = 0; i < uiOverlays.Length; i++)
+        {
+            if (i != indexSetScene) uiOverlays[i].SetActive(false);
+            else uiOverlays[i].SetActive(true);
+        }
+
+    }
+
 
 
     private void Update()
