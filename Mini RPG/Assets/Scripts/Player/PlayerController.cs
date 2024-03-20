@@ -23,6 +23,7 @@ public class PlayerController : GameBehaviour
     Health healthScript;
     PlayerControls controls;
 
+    GameObject groundCheck;
 
     public int playerNum;
 
@@ -46,6 +47,7 @@ public class PlayerController : GameBehaviour
 
         controls = new PlayerControls();
 
+        groundCheck = transform.Find("GroundCheck").gameObject;
 
     }
 
@@ -72,17 +74,22 @@ public class PlayerController : GameBehaviour
 
         anim.SetFloat("WalkSpeed", controller.velocity.magnitude);
 
-        controller.Move(movement * playerInfo.movSpeed * Time.deltaTime);
-        movement.y = 0;
+        //gravity check
+        if(!Physics.CheckSphere(groundCheck.transform.position, 1, _GM.groundMask))
+        {
+            movement += Physics.gravity;
 
-        //keep on floor
-        gameObject.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        }
+
+        controller.Move(movement * playerInfo.movSpeed * Time.deltaTime);
+
+
         #region Rotate Player
 
         #endregion
 
         #region Attack
-        if(attackIsHeld)
+        if (attackIsHeld)
         {
             if (currentWeapon != null)
             {

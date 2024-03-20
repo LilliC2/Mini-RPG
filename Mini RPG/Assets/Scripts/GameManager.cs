@@ -29,7 +29,10 @@ public class GameManager : Singleton<GameManager>
     public UnityEvent event_EnteredCombatScene;
     public UnityEvent event_newMap;
     public UnityEvent event_LoadedNewScene;
-    
+
+
+    //layer masks
+    public LayerMask groundMask;
 
     public void Awake()
     {
