@@ -28,7 +28,11 @@ public class GameManager : Singleton<GameManager>
     public UnityEvent event_ChangeActionMap;
     public UnityEvent event_EnteredCombatScene;
     public UnityEvent event_newMap;
-    
+    public UnityEvent event_LoadedNewScene;
+
+
+    //layer masks
+    public LayerMask groundMask;
 
     public void Awake()
     {
@@ -53,17 +57,15 @@ public class GameManager : Singleton<GameManager>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         print("Scene loaded");
+        event_LoadedNewScene.Invoke();
+        event_ChangeActionMap.Invoke();
 
-        if(scene.name.Contains("Combat"))
+        if (scene.name.Contains("Combat"))
         {
             event_EnteredCombatScene.Invoke();
-            event_ChangeActionMap.Invoke();
-
+           
         }
-        else
-        {
-            event_newMap.Invoke();
-        }
+ 
 
     }
 

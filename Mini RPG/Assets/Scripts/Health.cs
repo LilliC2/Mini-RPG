@@ -72,6 +72,11 @@ public class Health : GameBehaviour
 
     }
 
+    public void Die()
+    {
+        print("DIE");
+        Destroy(gameObject);
+    }
 
     public void GetHit(int amount, GameObject sender)
     {
