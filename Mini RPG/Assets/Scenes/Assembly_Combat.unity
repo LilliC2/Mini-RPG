@@ -1825,13 +1825,21 @@ PrefabInstance:
       propertyPath: stats.attack
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2708385887971927124, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
+      propertyPath: stats.visionRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3705204189903607506, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
+      propertyPath: skeletonStats.visionRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5404943668081012497, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
     - target: {fileID: 5404943668081012497, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6823974409567708811, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
       propertyPath: m_RootOrder
