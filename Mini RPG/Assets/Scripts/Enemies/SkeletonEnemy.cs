@@ -65,27 +65,23 @@ public class SkeletonEnemy : GameBehaviour
         if(currentState != CurrentState.Dead)
         {
 
-            var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
-
-
-            if (distance <= skeletonStats.visionRange && currentState != CurrentState.Orbit && currentState != CurrentState.Attack)
-                currentState = CurrentState.Chase;
-            else if( distance < 5 && currentState != CurrentState.Attack)
-                currentState = CurrentState.Orbit;
-            //else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
-            //    currentState = CurrentState.Attack;
-            else if(currentState != CurrentState.Attack) currentState = CurrentState.Patrol;
+  
 
 			if (passedTime < attackDelay) passedTime += Time.deltaTime;
             anim.SetFloat("Speed", agent.velocity.magnitude);
 
             if (targetPlayer != null)
             {
-                if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.visionRange && Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) >= skeletonStats.attackRange)
+                var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
+
+
+                if (distance <= skeletonStats.visionRange && currentState != CurrentState.Orbit && currentState != CurrentState.Attack)
                     currentState = CurrentState.Chase;
-                else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
-                    currentState = CurrentState.Attack;
-                else currentState = CurrentState.Patrol;
+                else if (distance < 5 && currentState != CurrentState.Attack)
+                    currentState = CurrentState.Orbit;
+                //else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
+                //    currentState = CurrentState.Attack;
+                else if (currentState != CurrentState.Attack) currentState = CurrentState.Patrol;
 
             }
             else currentState = CurrentState.Patrol;
@@ -250,6 +246,9 @@ public class SkeletonEnemy : GameBehaviour
         currentState = CurrentState.Dead;
 
         anim.SetTrigger("Die");
+
+        //anim.enabled = false;
+
         //ExecuteAfterSeconds(2, ()=> transform.DOScale(0, 0.5f));
         //ExecuteAfterSeconds(2.5f, () => Destroy(gameObject));
     }
