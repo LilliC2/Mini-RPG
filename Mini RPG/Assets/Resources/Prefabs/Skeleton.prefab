@@ -38,7 +38,7 @@ Transform:
   m_Children:
   - {fileID: 6501895684817961052}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4666832863028699311
 MeshFilter:
@@ -62,13 +62,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats:
     name: Skeleton
-    attack: 3
-    health: 10000
+    attack: 1
+    health: 5
     defence: 0
     magic: 0
     movementSpeed: 3
-    attackRange: 1.5
-    visionRange: 5
+    attackRange: 1
+    visionRange: 4
     attackDelay: 1
 --- !u!114 &3705204189903607506
 MonoBehaviour:
@@ -159,8 +159,26 @@ MonoBehaviour:
         m_CallState: 2
   OnDeathWithRef:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3705204189903607506}
+        m_TargetAssemblyTypeName: SkeletonEnemy, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isDead: 0
+  ApplyParalysisEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ApplySlownessEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!195 &1284728386895724516
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -412,6 +430,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isDead: 0
+  ApplyParalysisEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ApplySlownessEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &9185627646944009289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -481,9 +505,6 @@ PrefabInstance:
       addedObject: {fileID: 6491773444414118922}
     - targetCorrespondingSourceObject: {fileID: 2037921496895444295, guid: a8cc610235c43164cb7d9665673d0322, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1254702138043417423}
-    - targetCorrespondingSourceObject: {fileID: 2037921496895444295, guid: a8cc610235c43164cb7d9665673d0322, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 304579441629079458}
   m_SourcePrefab: {fileID: 100100000, guid: a8cc610235c43164cb7d9665673d0322, type: 3}
 --- !u!1 &7147706704653650190 stripped
@@ -512,20 +533,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4770714, y: 0.08938338, z: 1.0367072}
   m_Center: {x: 0.00269093, y: 0.000002345068, z: 0.5889572}
---- !u!114 &1254702138043417423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7147706704653650190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 670e1d83b687a7647a7800db6aebf0cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon:
-    attack: 0
 --- !u!54 &304579441629079458
 Rigidbody:
   m_ObjectHideFlags: 0

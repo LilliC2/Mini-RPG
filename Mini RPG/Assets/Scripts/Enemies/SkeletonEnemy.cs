@@ -16,7 +16,7 @@ public class SkeletonEnemy : GameBehaviour
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
     public UnityEvent<GameObject> OnAttack;
 
-    public enum CurrentState { Patrol, Chase ,Attack }
+    public enum CurrentState { Patrol, Chase ,Attack, Dead }
     public CurrentState currentState;
 
     bool hasAttacked;
@@ -57,20 +57,24 @@ public class SkeletonEnemy : GameBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (passedTime < attackDelay) passedTime += Time.deltaTime;
-
-        anim.SetFloat("Speed", agent.velocity.magnitude);
-
-        if(targetPlayer != null)
+        if(currentState != CurrentState.Dead)
         {
-            if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.visionRange && Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) >= skeletonStats.attackRange)
-                currentState = CurrentState.Chase;
-            else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
-                currentState = CurrentState.Attack;
-            else currentState = CurrentState.Patrol;
+            if (passedTime < attackDelay) passedTime += Time.deltaTime;
 
+            anim.SetFloat("Speed", agent.velocity.magnitude);
+
+            if (targetPlayer != null)
+            {
+                if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.visionRange && Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) >= skeletonStats.attackRange)
+                    currentState = CurrentState.Chase;
+                else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
+                    currentState = CurrentState.Attack;
+                else currentState = CurrentState.Patrol;
+
+            }
+            else currentState = CurrentState.Patrol;
         }
-        else currentState = CurrentState.Patrol;
+
 
 
         switch (currentState)
@@ -134,6 +138,14 @@ public class SkeletonEnemy : GameBehaviour
 
     }
 
+    public void Die()
+    {
+        currentState = CurrentState.Dead;
+
+        anim.SetTrigger("Die");
+        //ExecuteAfterSeconds(2, ()=> transform.DOScale(0, 0.5f));
+        //ExecuteAfterSeconds(2.5f, () => Destroy(gameObject));
+    }
 
     /// <summary>
     /// To be used in OnHitWithRef(GameObject) to change target to player who hit it
