@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using DG.Tweening;
+
 
 public class BomberEnemy : GameBehaviour
 {
@@ -19,7 +21,7 @@ public class BomberEnemy : GameBehaviour
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
     public UnityEvent<GameObject> OnAttack;
 
-    public enum CurrentState { Idle, Chase }
+    public enum CurrentState { Idle, Chase, Dead, Explode }
 
     public CurrentState currentState;
 
@@ -66,17 +68,24 @@ public class BomberEnemy : GameBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetPlayer == null) FindClosetsPlayer();
-
-        if (targetPlayer != null)
+        if(currentState != CurrentState.Dead)
         {
-            var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
-            if (distance <= bomberStats.visionRange && distance > bomberStats.attackRange)
-                currentState = CurrentState.Chase;
-            else if (distance < bomberStats.attackRange)
-                Explode();
-            else currentState = CurrentState.Idle;
+            anim.SetFloat("Speed", agent.velocity.magnitude);
+
+
+            if (targetPlayer == null) FindClosetsPlayer();
+
+            if (targetPlayer != null)
+            {
+                var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
+                if (distance <= bomberStats.visionRange && distance > bomberStats.attackRange)
+                    currentState = CurrentState.Chase;
+                else if (distance < bomberStats.attackRange)
+                    StartCoroutine(Explode());
+                else currentState = CurrentState.Idle;
+            }
         }
+
 
         switch (currentState)
         {
@@ -90,6 +99,7 @@ public class BomberEnemy : GameBehaviour
                 agent.SetDestination(targetPlayer.transform.position);
 
                 break;
+
         }
     }
 
@@ -117,36 +127,57 @@ public class BomberEnemy : GameBehaviour
 
     }
 
-    public void Explode()
+    public void Die()
     {
+        currentState = CurrentState.Dead;
+
+        anim.SetTrigger("Die");
+
+        //anim.enabled = false;
+
+        ExecuteAfterSeconds(1.5f, () => transform.DOScale(0, 0.5f));
+        ExecuteAfterSeconds(2f, () => Destroy(gameObject));
+    }
+
+
+    IEnumerator Explode()
+    {
+
         if (!hasExploded)
         {
             hasExploded = true;
 
             agent.SetDestination(targetPlayer.transform.position);
+            anim.SetTrigger("Attack");
+            yield return new WaitForSeconds(0.5f);
 
-            explosionPS.Play();
             //get everything in explosion range with health script
             var healthScriptHoldersInRange = Physics.OverlapSphere(gameObject.transform.position, explosionRange);
+
+
             List<Health> thingsHit = new List<Health>();
 
             foreach (var holder in healthScriptHoldersInRange)
             {
                 if (holder.TryGetComponent<Health>(out healthScript))
-                    thingsHit.Add(healthScript);
+                {
+                    if (holder.transform.root.gameObject != gameObject) thingsHit.Add(healthScript);
+
+                }
             }
+
 
             //damage all and apply burn to all
             foreach (var thing in thingsHit)
             {
+                print(thing.name + " got hit");
                 thing.GetHit(bomberStats.attack, transform.gameObject);
                 thing.ApplyBurn(burnLength, burnTickDmg);
             }
 
-            ExecuteAfterSeconds(1, () => Destroy(gameObject));
-            
-            //kill itself
+            Destroy(gameObject);
         }
+
 
 
     }
