@@ -50,7 +50,6 @@ public class ZombieEnemy : GameBehaviour
         healthScript.InitilizeHealth(zombieStats.health, zombieStats.defence);
 
         agent.speed = zombieStats.movementSpeed;
-        currentDestination = SearchWalkPoint();
 
        InvokeRepeating("ChanceToHowl", 10, Random.Range(5, 20));
 
@@ -188,6 +187,22 @@ public class ZombieEnemy : GameBehaviour
         targetPlayer = closestPlayer;
     }
 
+    #region Status Effects
+
+
+    public void ApplyBurn(float duration, float tickDmg)
+    {
+        StartCoroutine(Burn(duration, tickDmg));
+        ExecuteAfterSeconds(duration, () => StopCoroutine(Burn(duration, tickDmg)));
+    }
+
+    IEnumerator Burn(float duration, float tickDmg)
+    {
+        healthScript.currentHealth -= Mathf.RoundToInt(tickDmg);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Burn(duration, tickDmg));
+    }
+
     void ApplyParalysis(float duration)
     {
         agent.isStopped = true;
@@ -206,6 +221,8 @@ public class ZombieEnemy : GameBehaviour
         ExecuteAfterSeconds(duration, () => agent.speed = speedBeforeSlow);
 
     }
+
+    #endregion
 
 
     public void Attack()

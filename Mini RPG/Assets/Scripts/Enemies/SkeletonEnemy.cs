@@ -288,6 +288,22 @@ public class SkeletonEnemy : GameBehaviour
         targetPlayer = closestPlayer;
     }
 
+    #region Status Effects
+
+
+    public void ApplyBurn(float duration, float tickDmg)
+    {
+        StartCoroutine(Burn(duration, tickDmg));
+        ExecuteAfterSeconds(duration, () => StopCoroutine(Burn(duration, tickDmg)));
+    }
+
+    IEnumerator Burn(float duration, float tickDmg)
+    {
+        healthScript.currentHealth -= Mathf.RoundToInt(tickDmg);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Burn(duration, tickDmg));
+    }
+
     void ApplyParalysis(float duration)
     {
         agent.isStopped = true;
@@ -306,4 +322,6 @@ public class SkeletonEnemy : GameBehaviour
         ExecuteAfterSeconds(duration, () => agent.speed = speedBeforeSlow);
 
     }
+
+    #endregion
 }
