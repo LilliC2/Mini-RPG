@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b68ce674dca1a54ba83827526b91c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 20
+  strength: 5
   delay: 0.15
   OnBegin:
     m_PersistentCalls:
@@ -170,18 +170,6 @@ MonoBehaviour:
   OnHitWithRef:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5666217639873730872}
-        m_TargetAssemblyTypeName: KnockbackFeedback, Assembly-CSharp
-        m_MethodName: PlayFeedback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7855521052013065493}
         m_TargetAssemblyTypeName: SkeletonEnemy, Assembly-CSharp
         m_MethodName: ChangeTarget
@@ -820,6 +808,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1546008794712642, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3302398050391381098}
+    - targetCorrespondingSourceObject: {fileID: 1546008794712642, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 654295063927130594}
   m_SourcePrefab: {fileID: 100100000, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
 --- !u!4 &6964577552852242741 stripped
 Transform:
@@ -850,7 +841,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: -0.15, y: 0, z: 0}
 --- !u!54 &3302398050391381098
 Rigidbody:
@@ -879,3 +870,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &654295063927130594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967940363647961691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670e1d83b687a7647a7800db6aebf0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon:
+    attack: 0

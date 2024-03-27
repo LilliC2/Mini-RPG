@@ -155,17 +155,14 @@ public class SkeletonEnemy : GameBehaviour
                 gameObject.transform.LookAt(targetPlayer.transform.position);
 
                 var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
-                print("Disatnce is " + distance);
                 //reach radius of player
 
 
 
                 if (distance < 5 && distance > 1)
                 {
-                    print("IN RANGE");
                     if (!hasDestination)
                     {
-                        print("Has destination");
                         hasDestination = true;
                         currentDestination = OrbitAroundPlayer();
                         agent.SetDestination(currentDestination);

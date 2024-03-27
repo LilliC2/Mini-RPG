@@ -1315,8 +1315,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7147706704653650190, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1657915163}
   m_SourcePrefab: {fileID: 100100000, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
+--- !u!1 &1657915162 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7147706704653650190, guid: dbb8dc3c1b4f1074c997799af4b6d438, type: 3}
+  m_PrefabInstance: {fileID: 1657915161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1657915163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657915162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 670e1d83b687a7647a7800db6aebf0cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon:
+    attack: 0
 --- !u!1 &1753873322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,18 +1840,6 @@ PrefabInstance:
     - target: {fileID: 3698055710794109489, guid: d945bfb040956c2409aa9e7a232f812a, type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 4869084801595848311, guid: d945bfb040956c2409aa9e7a232f812a, type: 3}
-      propertyPath: stats.movementSpeed
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7053921059575328035, guid: d945bfb040956c2409aa9e7a232f812a, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: c929656c07909194ab8a5cd79f5f371d, type: 2}
-    - target: {fileID: 7053921059575328035, guid: d945bfb040956c2409aa9e7a232f812a, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
