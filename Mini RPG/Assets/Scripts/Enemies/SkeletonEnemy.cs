@@ -54,6 +54,7 @@ public class SkeletonEnemy : GameBehaviour
         agent.speed = skeletonStats.movementSpeed;
         currentDestination = SearchWalkPoint();
 
+        InvokeRepeating("ChanceToAttack", 10, Random.Range(5, 20));
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
         healthScript.ApplySlownessEvent.AddListener(ApplySlowness);
@@ -67,8 +68,8 @@ public class SkeletonEnemy : GameBehaviour
 
   
 
-			if (passedTime < attackDelay) passedTime += Time.deltaTime;
-            anim.SetFloat("Speed", agent.velocity.magnitude);
+			    if (passedTime < attackDelay) passedTime += Time.deltaTime;
+                anim.SetFloat("Speed", agent.velocity.magnitude);
 
             if (targetPlayer != null)
             {
@@ -186,7 +187,7 @@ public class SkeletonEnemy : GameBehaviour
                 if (agent.velocity.magnitude == 0) hasDestination = false;
 
                 //chance to attack after x seconds
-
+                
 
 
             break;
@@ -218,10 +219,16 @@ public class SkeletonEnemy : GameBehaviour
         return orbitPoint;
     }
 
-    void ChanceToAttack()
+    void ChanceToAttack()   
     {
-        int r = Random.Range(0, 4);
-        if(r == 1) currentState = CurrentState.Attack;
+        if(currentState == CurrentState.Orbit) 
+        {
+
+            int r = Random.Range(0, 4);
+            if (r == 1) currentState = CurrentState.Attack;
+
+        }
+
     }
 
     public void Attack()
@@ -249,8 +256,8 @@ public class SkeletonEnemy : GameBehaviour
 
         //anim.enabled = false;
 
-        //ExecuteAfterSeconds(2, ()=> transform.DOScale(0, 0.5f));
-        //ExecuteAfterSeconds(2.5f, () => Destroy(gameObject));
+        ExecuteAfterSeconds(1.5f, ()=> transform.DOScale(0, 0.5f));
+        ExecuteAfterSeconds(2f, () => Destroy(gameObject));
     }
 
     /// <summary>
