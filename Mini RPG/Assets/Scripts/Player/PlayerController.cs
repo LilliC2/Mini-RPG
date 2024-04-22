@@ -29,6 +29,7 @@ public class PlayerController : GameBehaviour
 
     Animator anim;
     Vector3 movement;
+    Vector3 direction;
     Vector3 lastMovement; //to have player look there
 
     CharacterController controller;
@@ -82,7 +83,8 @@ public class PlayerController : GameBehaviour
         }
 
         controller.Move(movement * playerInfo.movSpeed * Time.deltaTime);
-
+        if (transform.localEulerAngles != Vector3.zero) direction = transform.localEulerAngles;
+        if (controller.velocity.magnitude < 1) transform.localEulerAngles = direction;
 
         #region Rotate Player
 
