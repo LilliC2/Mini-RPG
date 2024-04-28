@@ -291,12 +291,13 @@ MonoBehaviour:
   - {fileID: 4839455753739807714, guid: 61208f91804e21345b8bfa5e95e775c5, type: 3}
   - {fileID: 4839455753739807714, guid: a8d0f441de21c884692d6e53fd74a7a2, type: 3}
   - {fileID: 4839455753739807714, guid: 38e9684e918000744a8662f8877ec2b1, type: 3}
-  minCorridorDistance: 25
-  maxCorridorDistance: 25
+  minCorridorDistance: 15
+  maxCorridorDistance: 15
   corridorTileSize: 1
   currentNumOfAdditionalRooms: 0
-  totalNumOfAdditionalRooms: 1
+  totalNumOfAdditionalRooms: 2
   addingToMainline: 0
+  spawnAdditionalRooms: 0
   notConnectedDoorList: []
 --- !u!4 &535348721
 Transform:
