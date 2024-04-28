@@ -23,6 +23,7 @@ public class PlayerInputHandler : GameBehaviour
 
         if (playerPrefab != null)
         {
+            if(_GM.spawnPoints.Length == 0) _GM.spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPoint");
             playerControls = GameObject.Instantiate(playerPrefab, _GM.spawnPoints[_GM.playerGameObjList.Count].transform.position, transform.rotation).GetComponent<PlayerController>();
             var go = playerControls.gameObject;
             _GM.playerGameObjList.Add(go);

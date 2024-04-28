@@ -27,7 +27,7 @@ public class CombatUI : GameBehaviour
     void Start()
     {
         _GM.event_EnteredCombatScene.AddListener(DisplayAbilityDecks);
-        DisplayAbilityDecks();
+        //DisplayAbilityDecks();
     }
 
     public void DisplayAbilityDecks()

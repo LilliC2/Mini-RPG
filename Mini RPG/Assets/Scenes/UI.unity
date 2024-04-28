@@ -2973,6 +2973,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1516214530257610189, guid: ec272864922a4ce4c85989b01b854a7f, type: 3}
+      propertyPath: gameState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5374272632228251228, guid: ec272864922a4ce4c85989b01b854a7f, type: 3}
       propertyPath: m_RootOrder
       value: 0

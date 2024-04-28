@@ -7,7 +7,6 @@ using UnityEngine.Tilemaps;
 public class LevelGeneration : Singleton<LevelGeneration>
 {
     HashSet<Vector3> tilesHashSet;
-    [SerializeField] Tilemap tilemap;
     [SerializeField] Grid grid;
     [SerializeField] GameObject tempRoom;
     [SerializeField] GameObject tempCorridor;
@@ -28,12 +27,15 @@ public class LevelGeneration : Singleton<LevelGeneration>
 
     [SerializeField] float minCorridorDistance;
     [SerializeField] float maxCorridorDistance;
+    [SerializeField] float corridorTileSize;
 
     [SerializeField] int currentNumOfAdditionalRooms;
     [SerializeField] int totalNumOfAdditionalRooms;
 
     GameObject selectedRoomPrefab;
     GameObject doorOfPlacedRoom;
+    [SerializeField] bool addingToMainline;
+    [SerializeField] bool spawnAdditionalRooms = false;
 
     [SerializeField] List<GameObject> notConnectedDoorList;
 
@@ -53,29 +55,41 @@ public class LevelGeneration : Singleton<LevelGeneration>
 
     private void Update()
     {
-
+        while (spawnAdditionalRooms)
+        {
+            print("Add additional rooms");
+            FindValidRoomSpot();
+            if (currentNumOfAdditionalRooms == totalNumOfAdditionalRooms || notConnectedDoorList.Count == 0) spawnAdditionalRooms = false; 
+        }
     }
 
     void GenerateDungeon()
     {
+        addingToMainline = true;
+
         PlaceMainLineRooms();
 
-       // totalNumOfAdditionalRooms = 5; //Random.Range(5, 10);
-
-        while(currentNumOfAdditionalRooms != totalNumOfAdditionalRooms && notConnectedDoorList.Count != 0)
+        // totalNumOfAdditionalRooms = 5; //Random.Range(5, 10);
+        var allFloorTiles = GameObject.FindGameObjectsWithTag("FloorTile");
+        foreach (var tile in allFloorTiles)
         {
-            FindValidRoomSpot();
+            tilesHashSet.Add(tile.transform.position);
         }
 
-        foreach (var door in notConnectedDoorList)
-        {
-            door.GetComponent<Renderer>().material.color = Color.red;
-        }
+        spawnAdditionalRooms = true;
+
+        //if(currentNumOfAdditionalRooms == totalNumOfAdditionalRooms)
+        //{
+        //    foreach (var door in notConnectedDoorList)
+        //    {
+        //        door.GetComponent<Renderer>().material.color = Color.red;
+        //    }
+        //}
+
     }
 
     void FindValidRoomSpot()
     {
-
         //pick random door
         var selectedDoor = notConnectedDoorList[Random.Range(0, notConnectedDoorList.Count)];
         var selecteRoom = selectedDoor.transform.parent.gameObject;
@@ -95,48 +109,54 @@ public class LevelGeneration : Singleton<LevelGeneration>
         print("Checking door at coords " + roomCoOrds);
         Vector2 checkingCoOrds = new();
         //find its direction
-        if (selectedDoor.name.Contains("Forward"))
+        if (selectedDoor.transform.parent.name.Contains("Forward"))
         {
             checkingCoOrds = new Vector2(roomCoOrds.x, roomCoOrds.y + 1);
             direction = 1;
         }
-        if (selectedDoor.name.Contains("Back"))
+        if (selectedDoor.transform.parent.name.Contains("Back"))
         {
             checkingCoOrds = new Vector2(roomCoOrds.x, roomCoOrds.y - 1);
             direction = 2;
         }
-        if (selectedDoor.name.Contains("Right"))
+        if (selectedDoor.transform.parent.name.Contains("Right"))
         {
             checkingCoOrds = new Vector2(roomCoOrds.x+1, roomCoOrds.y);
             direction = 3;
         }
-        if (selectedDoor.name.Contains("Left"))
+        if (selectedDoor.transform.parent.name.Contains("Left"))
         {
             checkingCoOrds = new Vector2(roomCoOrds.x-1, roomCoOrds.y);
             direction = 4;
         }
 
+        print("Checking coords " + checkingCoOrds + " are free");
+
         //check if theres a room in the coords of where we want to place
         if(!roomCoOrdsList.Contains(checkingCoOrds))
         {
-            print("Room is valid go to next step with coords " + checkingCoOrds + " from checking coords " + roomCoOrds + " door is " + selectedDoor.name);
-            print("Room is valid go to next step with coords " + checkingCoOrds + " from checking coords " + roomCoOrds + " door is " + selectedDoor.name + " direction " + direction);
+            print("Room is valid go to next step with coords " + checkingCoOrds + " from checking coords " + roomCoOrds + " door is " + selectedDoor.name + " direction " + direction + " add to mainline " + addingToMainline);
             //yes we can place a room here
-            FindValidRoomType(selectedDoor,checkingCoOrds,direction);
+            var room = FindValidRoomType(selectedDoor,checkingCoOrds,direction);
+            PlaceRoom(selectedDoor, room, checkingCoOrds, direction);
+            if (!addingToMainline) currentNumOfAdditionalRooms++;
+
         }
         else
         {
-            print("Room is invalid, return");
+            print("Room is invalid at " + checkingCoOrds +", return");
 
             //close door
             //selectedDoor.GetComponent<Renderer>().material.color = Color.red;
             notConnectedDoorList.Remove(selectedDoor);
+
         }
+
 
 
     }
 
-    void FindValidRoomType(GameObject connectingDoor, Vector2 roomCoOrds, int direction)
+    GameObject FindValidRoomType(GameObject connectingDoor, Vector2 roomCoOrds, int direction)
     {
 
         switch(direction)
@@ -163,12 +183,14 @@ public class LevelGeneration : Singleton<LevelGeneration>
                 break;
         }
 
-        if (selectedRoomPrefab != null) print("Attempting to place: " + connectingDoor.name + ", " + selectedRoomPrefab.name + ", " + roomCoOrds + ", " + direction);
+        if (selectedRoomPrefab != null)
+        {
+            print("Attempting to place: " + connectingDoor.name + ", " + selectedRoomPrefab.name + ", " + roomCoOrds + ", " + direction + mainlineRooms);
+        }
+        else print("NO PREFAB FOUND");
 
-        currentNumOfAdditionalRooms++;
-        PlaceRoom(connectingDoor, selectedRoomPrefab, roomCoOrds, direction);
-        selectedRoomPrefab = null;
 
+        return selectedRoomPrefab;
     }
 
     void PlaceMainLineRooms()
@@ -177,46 +199,312 @@ public class LevelGeneration : Singleton<LevelGeneration>
          * then the mainline builds towards it, then would encourage twists and turns in the critical path
          */
 
-
         //place spawn room
         PlaceRoom(null, spawnRooms[0], new Vector2(0, 0), 0);
 
-
         int numOfRoomsOnMainLine = 5;// Random.Range(3, 7);
-        print("Adding " + numOfRoomsOnMainLine + " to mainline");
+
+        //calculate end room
+        int x = Random.Range(0, numOfRoomsOnMainLine + 1);
+        int z = numOfRoomsOnMainLine - x;
+
+        //50/50 to make x a negative
+        if (Random.Range(0, 2) == 0) x = -x;
+
+        Vector2 endRoomCoords = new Vector2(x, z);
+
+        ////place end room
+        //PlaceRoom(null, endRooms[0], new Vector2(x, z), 0);
+
+        Vector2 lastPlacePos = roomCoOrdsList[0];
 
         for (int i = 1; i <= numOfRoomsOnMainLine; i++)
         {
-            //place end room
-            print("Placing room " + i);
             RoomBlueprint previousRoomBlueprint;
+
+            //move x first
+            Vector2 placePos = lastPlacePos;
+            int direction = 0;
+
+
+            if(lastPlacePos.x != x)
+            {
+                if (x > lastPlacePos.x)
+                {
+                    placePos = new Vector2(placePos.x + 1, placePos.y);
+                    direction = 3;
+                }
+                else if (x < lastPlacePos.x)
+                {
+                    placePos = new Vector2(placePos.x - 1, placePos.y);
+                    direction = 4;
+                }
+            }
+            if(x == lastPlacePos.x && z != lastPlacePos.y)
+            {
+                if (z > lastPlacePos.y)
+                {
+                    placePos = new Vector2(placePos.x, placePos.y + 1);
+                    direction = 1;
+
+                }
+                else if (z < lastPlacePos.y)
+                {
+                    placePos = new Vector2(placePos.x, placePos.y - 1);
+                    direction = 2;
+
+                }
+            }
+            print("Last place = " + lastPlacePos + " heading to " + endRoomCoords + " in direction " + direction);
 
 
             previousRoomBlueprint = roomGOList[i - 1].GetComponent<RoomBlueprint>();
+            print(previousRoomBlueprint);
+            switch (direction)
+            {
+                case 1:
+                    //forward
+                    print("Forward");
+                    doorOfPlacedRoom = previousRoomBlueprint.roomTileData.forwardDoor;
 
-            //all these rooms are being placed in 1 direction, forward
-            var connectingDoor = previousRoomBlueprint.roomTileData.forwardDoor;
+                    break;
+                case 2:
+                    //back
+                    print("back");
 
-            //here i would generate the room type
+                    doorOfPlacedRoom = previousRoomBlueprint.roomTileData.backDoor;
+
+
+                    break;
+                case 3:
+                    //right
+                    print("right");
+
+                    doorOfPlacedRoom = previousRoomBlueprint.roomTileData.rightDoor;
+
+                    break;
+                case 4:
+                    //left
+                    print("left");
+
+                    doorOfPlacedRoom = previousRoomBlueprint.roomTileData.leftDoor;
+                    break;
+                default: //for spawn room
+                    print("default");
+
+                    doorOfPlacedRoom = previousRoomBlueprint.roomTileData.allDoors[0];
+                    break;
+            }
+
+            print("Connecting to " + doorOfPlacedRoom.name);
+
+
             if (i == numOfRoomsOnMainLine)
             {
-                print("End room");
-                PlaceRoom(connectingDoor, endRooms[0], new Vector2(0, i), 1);
+                PlaceRoom(doorOfPlacedRoom, endRooms[0], endRoomCoords, direction);
+                addingToMainline = false;
             }
             else
             {
-                PlaceRoom(connectingDoor, mainlineRooms[Random.Range(0, mainlineRooms.Count)], new Vector2(0, i), 1);
+                //calculate next direction
+                int nextDirection = 0;
 
+                if (placePos.x != x)
+                {
+                    if (x > placePos.x)
+                    {
+                        nextDirection = 3;
+                    }
+                    else if (x < lastPlacePos.x)
+                    {
+                        nextDirection = 4;
+                    }
+                }
+                if (x == placePos.x && z != placePos.y)
+                {
+                    if (z > placePos.y)
+                    {
+                        nextDirection = 1;
+                    }
+                    else if (z < placePos.y)
+                    {
+                        nextDirection = 2;
+                    }
+                }
+                var room = MainlineValidPlace(direction, nextDirection);
+                PlaceRoom(doorOfPlacedRoom, room, placePos, direction);
+            }
+            lastPlacePos = placePos;
+            doorOfPlacedRoom = null;
+        }
+
+    }
+
+    GameObject MainlineValidPlace(int currentDirection, int nextDirection)
+    {
+        GameObject selectedRoom = null;
+
+        List<GameObject> possibleRooms = new List<GameObject>();
+        print("Current direction " + currentDirection + " Next Direction " + nextDirection);
+        //last door
+        if(currentDirection == nextDirection)
+        {
+            //heading in same direction
+            if(currentDirection == 1 || currentDirection == 2) //door must be forward or back
+            {
+                for (int i = 0; i < forwardDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(backDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(backDoorRooms[i]);
+                    }
+                }
+
+            }
+            else if(currentDirection ==3  || currentDirection == 4)
+            {
+                for (int i = 0; i < leftDoorRooms.Count; i++)
+                {
+                    if (leftDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+        }
+        else if(currentDirection != nextDirection)
+        {
+            //turning
+            print("turn");
+            if((currentDirection == 1 && nextDirection == 2) || (currentDirection == 2 && nextDirection == 1))
+            {
+                for (int i = 0; i < forwardDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(backDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(backDoorRooms[i]);
+                    }
+                }
+            }
+            if((currentDirection == 3 && nextDirection == 4) || (currentDirection == 4 && nextDirection == 3))
+            {
+                for (int i = 0; i < leftDoorRooms.Count; i++)
+                {
+                    if (leftDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 1 && nextDirection == 3)
+            {
+                for (int i = 0; i < forwardDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 1 && nextDirection == 4)
+            {
+                for (int i = 0; i < forwardDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(leftDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(leftDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 2 && nextDirection == 4)
+            {
+                for (int i = 0; i < backDoorRooms.Count; i++)
+                {
+                    if (backDoorRooms.Contains(leftDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(leftDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 2 && nextDirection == 3)
+            {
+
+                for (int i = 0; i < backDoorRooms.Count; i++)
+                {
+                    if (backDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 4 && nextDirection == 1)
+            {
+
+                for (int i = 0; i < rightDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 4 && nextDirection == 2)
+            {
+
+                for (int i = 0; i < rightDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(rightDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(rightDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 3 && nextDirection == 1)
+            {
+
+                for (int i = 0; i < leftDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(leftDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(leftDoorRooms[i]);
+                    }
+                }
+            }
+            else if(currentDirection == 3 && nextDirection == 2)
+            {
+
+                for (int i = 0; i < leftDoorRooms.Count; i++)
+                {
+                    if (forwardDoorRooms.Contains(leftDoorRooms[i]))
+                    {
+                        //room is in both
+                        possibleRooms.Add(leftDoorRooms[i]);
+                    }
+                }
             }
 
 
 
         }
 
+        print(possibleRooms.Count);
+        selectedRoom = possibleRooms[Random.Range(0, possibleRooms.Count)];
 
-
-
+        return selectedRoom;
     }
+
+
 
     void PlaceRoom(GameObject connectingDoor, GameObject roomPrefab, Vector2 roomCoOrds, int direction)
     {
@@ -231,6 +519,7 @@ public class LevelGeneration : Singleton<LevelGeneration>
         if (!roomCoOrdsList.Contains(roomCoOrds))
         {
             print("roomCoOrds " + roomCoOrds + " are free");
+            print("Create "+ roomPrefab.name);
 
             var roomPlaced = Instantiate(roomPrefab);
 
@@ -239,13 +528,13 @@ public class LevelGeneration : Singleton<LevelGeneration>
             float distanceToAdd = 0;
             Vector3 placePosition = new();
             //if connecting door is null, it is the spawn room
-            if (connectingDoor == null)
+            if (roomCoOrds == Vector2.zero)
             {
                 placePosition = Vector3.zero;
             }
             else
             {
-                placePosition = new Vector3(connectingDoor.transform.position.x, 0, connectingDoor.transform.position.z);
+                placePosition = new Vector3(connectingDoor.transform.parent.transform.position.x, 0, connectingDoor.transform.parent.transform.position.z);
 
             }
 
@@ -278,7 +567,7 @@ public class LevelGeneration : Singleton<LevelGeneration>
             var bluePrints = roomPlaced.GetComponent<RoomBlueprint>();
 
 
-            if (connectingDoor != null) connectingDoor.GetComponent<Renderer>().material.color = Color.green;
+            //if (connectingDoor != null) connectingDoor.GetComponent<Renderer>().material.color = Color.green;
             //door from this room go green
               
             switch (direction)
@@ -309,8 +598,9 @@ public class LevelGeneration : Singleton<LevelGeneration>
                     doorOfPlacedRoom = bluePrints.roomTileData.allDoors[0];
                     break;
             }
-            doorOfPlacedRoom.GetComponent<Renderer>().material.color = Color.green;
-            notConnectedDoorList.Remove(doorOfPlacedRoom);
+
+            print("Direction " + direction + " door " + doorOfPlacedRoom);
+            if(notConnectedDoorList.Contains(doorOfPlacedRoom))notConnectedDoorList.Remove(doorOfPlacedRoom);
 
 
             roomPlaced.transform.position = placePosition;
@@ -320,51 +610,78 @@ public class LevelGeneration : Singleton<LevelGeneration>
             roomGOList.Add(roomPlaced);
             notConnectedDoorList.AddRange(roomPlaced.GetComponent<RoomBlueprint>().roomTileData.allDoors);
 
-            if(connectingDoor != null) PlaceCorridor(connectingDoor, doorOfPlacedRoom, direction);
+            if(connectingDoor != null && doorOfPlacedRoom != null) SetDoorTeleports(connectingDoor, doorOfPlacedRoom);
+
+
+            //if(connectingDoor != null) PlaceCorridor(connectingDoor, doorOfPlacedRoom, direction);
 
         }
     }
 
-    void PlaceCorridor(GameObject doorA, GameObject doorB, int direction)
+    void SetDoorTeleports(GameObject doorA, GameObject doorB)
     {
-        //travel from A to B
-        var distanceBetweenDoors = Mathf.RoundToInt(Vector3.Distance(doorA.transform.position, doorB.transform.position));
-        Vector3 lastPlacePos = doorA.transform.parent.transform.position;
-        Vector3 currentPlacePos = new();
-        print(distanceBetweenDoors);
-        for (int i = 0; i < distanceBetweenDoors; i++)
-        {
-            
-            switch (direction)
-            {
-                case 1:
-                    //forward
-                    currentPlacePos = new Vector3(lastPlacePos.x, lastPlacePos.y, lastPlacePos.z + 1);
+        var doorATPscript = doorA.GetComponentInChildren<RoomTP>();
+        var doorBTPscript = doorB.GetComponentInChildren<RoomTP>();
 
-                    break;
-                case 2:
-                    //back
-                    currentPlacePos = new Vector3(lastPlacePos.x, lastPlacePos.y, lastPlacePos.z - 1);
+        doorATPscript.GetGoalDoorSpawnPoints(doorB);
+        doorBTPscript.GetGoalDoorSpawnPoints(doorA);
 
+        doorA.GetComponent<Renderer>().material.color = Color.green;
+        doorB.GetComponent<Renderer>().material.color = Color.green;
 
-                    break;
-                case 3:
-                    //right
-                    currentPlacePos = new Vector3(lastPlacePos.x+1, lastPlacePos.y, lastPlacePos.z);
-
-
-                    break;
-                case 4:
-                    //left
-                    currentPlacePos = new Vector3(lastPlacePos.x - 1, lastPlacePos.y, lastPlacePos.z);
-
-                    break;
-
-            }
-
-            
-            var corridor = Instantiate(tempCorridor, currentPlacePos, doorA.transform.rotation);
-            lastPlacePos = currentPlacePos;
-        }
     }
+
+    //void PlaceCorridor(GameObject doorA, GameObject doorB, int direction)
+    //{
+    //    //travel from A to B
+    //    var distanceBetweenDoors = Vector3.Distance(doorA.transform.position, doorB.transform.position);
+    //    if (distanceBetweenDoors < 1) distanceBetweenDoors = 0;
+    //    distanceBetweenDoors = Mathf.RoundToInt(distanceBetweenDoors);
+    //    Vector3 lastPlacePos = doorA.transform.position;
+    //    Vector3 currentPlacePos = new();
+    //    print(distanceBetweenDoors);
+    //    if(distanceBetweenDoors != 0)
+    //    {
+    //        for (int i = 0; i < distanceBetweenDoors; i++)
+    //        {
+
+    //            switch (direction)
+    //            {
+    //                case 1:
+    //                    //forward
+    //                    currentPlacePos = new Vector3(lastPlacePos.x, lastPlacePos.y, lastPlacePos.z + corridorTileSize);
+
+    //                    break;
+    //                case 2:
+    //                    //back
+    //                    currentPlacePos = new Vector3(lastPlacePos.x, lastPlacePos.y, lastPlacePos.z - corridorTileSize);
+
+
+    //                    break;
+    //                case 3:
+    //                    //right
+    //                    currentPlacePos = new Vector3(lastPlacePos.x + corridorTileSize, lastPlacePos.y, lastPlacePos.z);
+
+
+    //                    break;
+    //                case 4:
+    //                    //left
+    //                    currentPlacePos = new Vector3(lastPlacePos.x - corridorTileSize, lastPlacePos.y, lastPlacePos.z);
+
+    //                    break;
+
+    //            }
+
+    //            if(!tilesHashSet.Contains(currentPlacePos))
+    //            {
+    //                var corridor = Instantiate(tempCorridor, currentPlacePos, doorA.transform.rotation);
+    //                tilesHashSet.Add(currentPlacePos);
+    //            }
+    //            lastPlacePos = currentPlacePos;
+
+    //        }
+    //    }
+
+    //}
 }
+

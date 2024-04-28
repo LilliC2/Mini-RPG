@@ -9,6 +9,7 @@ TagManager:
   - Chef
   - Enemy
   - PlayerWeapon
+  - FloorTile
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Player
   - PlayerWepaon
   - Ground
-  - 
+  - FloorTile
   - 
   - 
   - 
