@@ -294,7 +294,7 @@ MonoBehaviour:
   maxCorridorDistance: 15
   corridorTileSize: 1
   currentNumOfAdditionalRooms: 0
-  totalNumOfAdditionalRooms: 2
+  totalNumOfAdditionalRooms: 8
   addingToMainline: 0
   spawnAdditionalRooms: 0
   notConnectedDoorList: []

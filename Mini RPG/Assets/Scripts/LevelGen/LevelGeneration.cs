@@ -51,6 +51,7 @@ public class LevelGeneration : Singleton<LevelGeneration>
      * - Any rooms more than 1 co-ord away after not active to improve peformance
      * - make levels child of something
      * - system to delete current level so new level can be placed
+     * - room can take up multiple coords (for large rooms)
      * 
      */
 
