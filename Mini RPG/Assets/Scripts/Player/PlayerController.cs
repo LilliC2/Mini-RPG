@@ -147,6 +147,12 @@ public class PlayerController : GameBehaviour
     {
         print("Draw cards");
 
+
+        //temp
+        if(playerInfo.abilityDeck == null)
+        {
+        }
+
         for (int i = 0; i < 3; i++)
         {
             drawnAbilityCards[i] = playerInfo.abilityDeck[Random.Range(0, playerInfo.abilityDeck.Length)];

@@ -47,8 +47,8 @@ MonoBehaviour:
   warrior_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
-    cooldown: 0
-    manaCost: 0
+    cooldown: 2
+    manaCost: 3
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
