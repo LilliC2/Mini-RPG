@@ -247,9 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  grid: {fileID: 0}
-  tempRoom: {fileID: 4329495452640676778, guid: e31ee3265112a294b8c40190a965bdf2, type: 3}
-  tempCorridor: {fileID: 6657007927636980580, guid: 2d006ba2100f7ee4d8fafe4ff5857279, type: 3}
+  dungeonRoomsParent: {fileID: 646698345}
   roomCoOrdsList: []
   roomGOList: []
   mainlineRooms:
@@ -277,6 +275,7 @@ MonoBehaviour:
   - {fileID: 4839455753739807714, guid: 463b2ee07fc029a46830c10dd6f51ff3, type: 3}
   - {fileID: 4839455753739807714, guid: 78f7957278617b341a385ad7824bc5c7, type: 3}
   - {fileID: 4839455753739807714, guid: 38e9684e918000744a8662f8877ec2b1, type: 3}
+  - {fileID: 4839455753739807714, guid: defb10040bb280a4b85c3823ccf040d2, type: 3}
   rightDoorRooms:
   - {fileID: 4839455753739807714, guid: 5b411d1faae763b41a2cde6af44896a3, type: 3}
   - {fileID: 4839455753739807714, guid: 61208f91804e21345b8bfa5e95e775c5, type: 3}

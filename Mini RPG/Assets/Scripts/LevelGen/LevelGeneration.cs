@@ -520,8 +520,6 @@ public class LevelGeneration : Singleton<LevelGeneration>
         return selectedRoom;
     }
 
-
-
     void PlaceRoom(GameObject connectingDoor, GameObject roomPrefab, Vector2 roomCoOrds, int direction)
     {
         /*
@@ -537,7 +535,7 @@ public class LevelGeneration : Singleton<LevelGeneration>
             print("roomCoOrds " + roomCoOrds + " are free");
             print("Create "+ roomPrefab.name);
 
-            var roomPlaced = Instantiate(roomPrefab);
+            var roomPlaced = Instantiate(roomPrefab,dungeonRoomsParent.transform);
 
             //get bounds of room
             var bounds = roomPlaced.GetComponent<Collider>().bounds;
@@ -646,6 +644,7 @@ public class LevelGeneration : Singleton<LevelGeneration>
         doorB.GetComponent<Renderer>().material.color = Color.green;
 
     }
+
 
     //void PlaceCorridor(GameObject doorA, GameObject doorB, int direction)
     //{
