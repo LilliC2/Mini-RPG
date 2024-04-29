@@ -109,24 +109,31 @@ public class LevelGeneration : Singleton<LevelGeneration>
         print("Checking door at coords " + roomCoOrds);
         Vector2 checkingCoOrds = new();
         //find its direction
-        if (selectedDoor.transform.parent.name.Contains("Forward"))
+        if (selectedDoorBlueprint.roomTileData.forwardDoor == selectedDoor)
         {
             checkingCoOrds = new Vector2(roomCoOrds.x, roomCoOrds.y + 1);
+            print("Door go forward");
             direction = 1;
         }
-        if (selectedDoor.transform.parent.name.Contains("Back"))
+        if (selectedDoorBlueprint.roomTileData.backDoor == selectedDoor)
         {
             checkingCoOrds = new Vector2(roomCoOrds.x, roomCoOrds.y - 1);
+            print("Door go back");
+
             direction = 2;
         }
-        if (selectedDoor.transform.parent.name.Contains("Right"))
+        if (selectedDoorBlueprint.roomTileData.rightDoor == selectedDoor)
         {
             checkingCoOrds = new Vector2(roomCoOrds.x+1, roomCoOrds.y);
+            print("Door go right");
+
             direction = 3;
         }
-        if (selectedDoor.transform.parent.name.Contains("Left"))
+        if (selectedDoorBlueprint.roomTileData.leftDoor == selectedDoor)
         {
             checkingCoOrds = new Vector2(roomCoOrds.x-1, roomCoOrds.y);
+            print("Door go left");
+
             direction = 4;
         }
 
