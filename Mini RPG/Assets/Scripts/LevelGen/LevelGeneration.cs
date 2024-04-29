@@ -7,9 +7,8 @@ using UnityEngine.Tilemaps;
 public class LevelGeneration : Singleton<LevelGeneration>
 {
     HashSet<Vector3> tilesHashSet;
-    [SerializeField] Grid grid;
-    [SerializeField] GameObject tempRoom;
-    [SerializeField] GameObject tempCorridor;
+    [SerializeField] GameObject dungeonRoomsParent;
+
     [SerializeField] List<Vector2> roomCoOrdsList;
     [SerializeField] List<GameObject> roomGOList;
 
@@ -45,6 +44,16 @@ public class LevelGeneration : Singleton<LevelGeneration>
      * Right = x +1
      * Left = x -1
      */
+
+
+    /*THINGS TO ADD
+     * 
+     * - Any rooms more than 1 co-ord away after not active to improve peformance
+     * - make levels child of something
+     * - system to delete current level so new level can be placed
+     * 
+     */
+
 
     private void Start()
     {
