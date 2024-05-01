@@ -10,12 +10,27 @@ public class PlayerAbilities : GameBehaviour
     private void Awake()
     {
         playerControllerScript = GetComponent<PlayerController>();
+        StartCoroutine(RegainMana(1));
+    }
+    // Update is called once per frame
+    
+    IEnumerator RegainMana(int manaRegain)
+    {
+        if(playerControllerScript.playerInfo.currentMana < playerControllerScript.playerInfo.maxMana)
+        {
+            playerControllerScript.playerInfo.currentMana += manaRegain;
+            if (playerControllerScript.playerInfo.currentMana > playerControllerScript.playerInfo.maxMana) playerControllerScript.playerInfo.currentMana = playerControllerScript.playerInfo.maxMana;
+        }
+
+        yield return new WaitForSeconds(2);
+        StartCoroutine(RegainMana(1));
     }
 
     public void CallAbility(AbilityCardClass ability)
     {
         if(!calledAbility)
         {
+            print("Call ability");
             calledAbility = true;
             if (playerControllerScript.playerInfo.currentMana >= ability.manaCost)
             {
@@ -24,6 +39,10 @@ public class PlayerAbilities : GameBehaviour
                 {
                     case "Dash":
                         Dash(ability);
+                        break;
+                      
+                    case "Shield":
+                        Shield(ability);
                         break;
 
                 }
@@ -38,7 +57,7 @@ public class PlayerAbilities : GameBehaviour
 
     /// <summary>
     /// Used by: All
-    /// 
+    /// Increase movement speed for a period of time
     /// </summary>
     void Dash(AbilityCardClass ability)
     {
@@ -54,10 +73,26 @@ public class PlayerAbilities : GameBehaviour
 
     }
 
-
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Used by: All
+    /// Increase defence for a period of time
+    /// </summary>
+    /// <param name="ability"></param>
+    void Shield(AbilityCardClass ability)
     {
-        
+        //increase defense
+        print("Shield");
+        //Increase speed by 25% for 5s for a mana cost of 3
+        var playerDefence = playerControllerScript.playerInfo.defence; //speed before increase
+        int defenceIncrease = Mathf.RoundToInt(playerDefence * 0.20f);
+        print("Shield increase " + defenceIncrease);    
+        playerControllerScript.playerInfo.defence += defenceIncrease;
+
+        ExecuteAfterSeconds(ability.duration, () => playerControllerScript.playerInfo.defence -= defenceIncrease);
+
+
+
     }
+
+
 }

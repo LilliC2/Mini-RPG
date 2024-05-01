@@ -9,7 +9,7 @@ public class TitleScreenUI : GameBehaviour
     public AbiltyDecks abilityDecks;
 
     [SerializeField]
-    CombatStyleStats combatStyleStats;
+    public CombatStyleStats combatStyleStats;
 
     int combatStyleCount_P1 = 0;
     int combatStyleCount_P2 = 0;

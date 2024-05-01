@@ -150,6 +150,7 @@ public class PlayerController : GameBehaviour
     {
         print("Draw cards");
 
+        playerInfo = _UI.titleScreenUI.combatStyleStats.warrior_stats;
 
         playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.warrior_AbilityDeck;
 

@@ -56,8 +56,8 @@ MonoBehaviour:
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
     dmg: 0
-    duration: 0
-    manaCost: 0
+    duration: 3
+    manaCost: 3
     rarity: 0
   - name: Inspire
     description: 'Allies within range gain a temporary attack and defence boost  '
