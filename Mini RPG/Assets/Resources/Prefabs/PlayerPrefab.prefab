@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 2222686288405103185}
   - component: {fileID: 6651578932793879770}
   - component: {fileID: 5241402120560580738}
+  - component: {fileID: -1571231439712129124}
   m_Layer: 6
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -93,11 +94,14 @@ MonoBehaviour:
     alignment: 0
     combatStyle: 0
     abilityDeck: []
+  playerAbilities: {fileID: 0}
   drawnAbilityCards: []
   selectedAbilityCard:
     name: 
     description: 
     cooldown: 0
+    dmg: 0
+    duration: 0
     manaCost: 0
     rarity: 0
   currentIndex: 0
@@ -278,6 +282,18 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1571231439712129124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071220273364839615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cc2d58a48e89e458517b73b4f75e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4103979640726758833
 PrefabInstance:
   m_ObjectHideFlags: 0

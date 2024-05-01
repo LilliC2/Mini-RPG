@@ -49,7 +49,8 @@ MonoBehaviour:
     health: 20
     movSpeed: 3
     defence: 1
-    mana: 15
+    maxMana: 15
+    currentMana: 0
     atkSpd: 0.5
     alignment: 0
     combatStyle: 0
@@ -59,7 +60,8 @@ MonoBehaviour:
     health: 24
     movSpeed: 3
     defence: 5
-    mana: 5
+    maxMana: 5
+    currentMana: 0
     atkSpd: 0.5
     alignment: 0
     combatStyle: 1
@@ -69,7 +71,8 @@ MonoBehaviour:
     health: 16
     movSpeed: 3
     defence: 0
-    mana: 20
+    maxMana: 20
+    currentMana: 0
     atkSpd: 0.5
     alignment: 0
     combatStyle: 2
@@ -79,7 +82,8 @@ MonoBehaviour:
     health: 16
     movSpeed: 3
     defence: 0
-    mana: 15
+    maxMana: 15
+    currentMana: 0
     atkSpd: 0.2
     alignment: 0
     combatStyle: 3
@@ -89,7 +93,8 @@ MonoBehaviour:
     health: 24
     movSpeed: 3
     defence: 3
-    mana: 6
+    maxMana: 15
+    currentMana: 0
     atkSpd: 0.5
     alignment: 0
     combatStyle: 4
@@ -99,7 +104,8 @@ MonoBehaviour:
     health: 20
     movSpeed: 4
     defence: 5
-    mana: 6
+    maxMana: 6
+    currentMana: 0
     atkSpd: 0.2
     alignment: 0
     combatStyle: 5
@@ -109,7 +115,8 @@ MonoBehaviour:
     health: 18
     movSpeed: 5
     defence: 2
-    mana: 10
+    maxMana: 10
+    currentMana: 0
     atkSpd: 0.2
     alignment: 0
     combatStyle: 6

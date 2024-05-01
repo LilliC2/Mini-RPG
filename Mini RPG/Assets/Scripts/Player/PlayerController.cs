@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : GameBehaviour
 {
     public PlayerClass playerInfo;
+    public PlayerAbilities playerAbilities;
 
 
     public AbilityCardClass[] drawnAbilityCards;
@@ -37,6 +39,7 @@ public class PlayerController : GameBehaviour
     {
         _GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
 
+        playerAbilities = GetComponent<PlayerAbilities>();
         healthScript.InitilizeHealth(playerInfo.health, playerInfo.defence);
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
@@ -148,10 +151,8 @@ public class PlayerController : GameBehaviour
         print("Draw cards");
 
 
-        //temp
-        if(playerInfo.abilityDeck == null)
-        {
-        }
+        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.warrior_AbilityDeck;
+
 
         for (int i = 0; i < 3; i++)
         {
@@ -197,6 +198,12 @@ public class PlayerController : GameBehaviour
     {
         controls.Gameplay.Disable();
 
+    }
+
+
+    public void OnUseSelectedAbility()
+    {
+        playerAbilities.CallAbility(selectedAbilityCard);
     }
 
     public void OnMove(InputAction.CallbackContext context)

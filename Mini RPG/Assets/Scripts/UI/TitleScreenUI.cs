@@ -6,7 +6,7 @@ using UnityEngine;
 public class TitleScreenUI : GameBehaviour
 {
     [SerializeField]
-    AbiltyDecks abilityDecks;
+    public AbiltyDecks abilityDecks;
 
     [SerializeField]
     CombatStyleStats combatStyleStats;
@@ -219,7 +219,8 @@ public class TitleScreenUI : GameBehaviour
                 playerInfo.defence = combatStyleStats.priest_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.priest_stats.movSpeed;
                 playerInfo.health = combatStyleStats.priest_stats.health;
-                playerInfo.mana = combatStyleStats.priest_stats.mana;
+                playerInfo.maxMana = combatStyleStats.priest_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.priest_stats.maxMana;
 
                 break;
             case PlayerClass.CombatStyles.Warrior:
@@ -229,7 +230,8 @@ public class TitleScreenUI : GameBehaviour
                 playerInfo.defence = combatStyleStats.warrior_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.warrior_stats.movSpeed;
                 playerInfo.health = combatStyleStats.warrior_stats.health;
-                playerInfo.mana = combatStyleStats.warrior_stats.mana;
+                playerInfo.maxMana = combatStyleStats.warrior_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.warrior_stats.maxMana;
 
                 break;
             case PlayerClass.CombatStyles.Mage:
@@ -237,35 +239,40 @@ public class TitleScreenUI : GameBehaviour
                 playerInfo.defence = combatStyleStats.mage_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.mage_stats.movSpeed;
                 playerInfo.health = combatStyleStats.mage_stats.health;
-                playerInfo.mana = combatStyleStats.mage_stats.mana;
+                playerInfo.maxMana = combatStyleStats.mage_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.mage_stats.maxMana;
                 break;
             case PlayerClass.CombatStyles.Bard:
                 playerInfo.attack = combatStyleStats.bard_stats.attack;
                 playerInfo.defence = combatStyleStats.bard_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.bard_stats.movSpeed;
                 playerInfo.health = combatStyleStats.bard_stats.health;
-                playerInfo.mana = combatStyleStats.bard_stats.mana;
+                playerInfo.maxMana = combatStyleStats.bard_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.bard_stats.maxMana;
                 break;
             case PlayerClass.CombatStyles.Cleric:
                 playerInfo.attack = combatStyleStats.cleric_stats.attack;
                 playerInfo.defence = combatStyleStats.cleric_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.cleric_stats.movSpeed;
                 playerInfo.health = combatStyleStats.cleric_stats.health;
-                playerInfo.mana = combatStyleStats.cleric_stats.mana;
+                playerInfo.maxMana = combatStyleStats.cleric_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.cleric_stats.maxMana;
                 break;
             case PlayerClass.CombatStyles.Monk:
                 playerInfo.attack = combatStyleStats.monk_stats.attack;
                 playerInfo.defence = combatStyleStats.monk_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.monk_stats.movSpeed;
                 playerInfo.health = combatStyleStats.monk_stats.health;
-                playerInfo.mana = combatStyleStats.monk_stats.mana;
-                break;
+                playerInfo.maxMana = combatStyleStats.monk_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.monk_stats.maxMana;
+                break;  
             case PlayerClass.CombatStyles.Ranger:
                 playerInfo.attack = combatStyleStats.ranger_stats.attack;
                 playerInfo.defence = combatStyleStats.ranger_stats.defence;
                 playerInfo.movSpeed = combatStyleStats.ranger_stats.movSpeed;
                 playerInfo.health = combatStyleStats.ranger_stats.health;
-                playerInfo.mana = combatStyleStats.ranger_stats.mana;
+                playerInfo.maxMana = combatStyleStats.ranger_stats.maxMana;
+                playerInfo.currentMana = combatStyleStats.ranger_stats.maxMana;
                 break;
 
 

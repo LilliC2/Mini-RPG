@@ -9,7 +9,8 @@ public class PlayerClass
     public int health;
     public float movSpeed;
     public int defence;
-    public int mana;
+    public int maxMana;
+    public int currentMana;
     public float atkSpd;
 
     public enum Alignments { Lawful_Good, Lawful_Neutral, Lawful_Evil, Neutral_Good, True_Neutral, Neutral_Evil, Chaotic_Good, Chaotic_Neutral, Chatotic_Evil }
