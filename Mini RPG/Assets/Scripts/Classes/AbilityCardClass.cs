@@ -11,6 +11,8 @@ public class AbilityCardClass
     public float cooldown;
     public float dmg;
     public float duration;
+    public float range;
+    public float boostValue;
     public int manaCost;
 
     public enum Rarity { Common, Uncommon, Rare, Legenardy}

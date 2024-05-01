@@ -14,7 +14,7 @@ public class PlayerController : GameBehaviour
     public AbilityCardClass[] drawnAbilityCards;
 
     public AbilityCardClass selectedAbilityCard;
-    [SerializeField] int currentIndex;
+    [SerializeField] int currentAbilityIndex;
     public WeaponClass currentWeapon;
 
     bool buttonCooldown;
@@ -60,7 +60,7 @@ public class PlayerController : GameBehaviour
 
         drawnAbilityCards = new AbilityCardClass[3];
 
-        currentIndex = 0;
+        currentAbilityIndex = 0;
 
         selectedAbilityCard = drawnAbilityCards[0];
 
@@ -172,18 +172,18 @@ public class PlayerController : GameBehaviour
         if (!buttonCooldown)
         {
             buttonCooldown = true;
-            currentIndex += direction;
+            currentAbilityIndex += direction;
 
-            if (currentIndex > 2) { currentIndex = 0; }
-            if (currentIndex < 0) { currentIndex = 2; }
-            print("Current index is " + currentIndex);
+            if (currentAbilityIndex > 2) { currentAbilityIndex = 0; }
+            if (currentAbilityIndex < 0) { currentAbilityIndex = 2; }
+            print("Current index is " + currentAbilityIndex);
 
-            selectedAbilityCard = drawnAbilityCards[currentIndex];
+            selectedAbilityCard = drawnAbilityCards[currentAbilityIndex];
 
 
             ExecuteAfterSeconds(0.5f, () => buttonCooldown = false);
         }
-        _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentIndex);
+        _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentAbilityIndex);
 
 
     }
@@ -204,7 +204,8 @@ public class PlayerController : GameBehaviour
 
     public void OnUseSelectedAbility()
     {
-        playerAbilities.CallAbility(selectedAbilityCard);
+
+        playerAbilities.CallAbility(selectedAbilityCard, currentAbilityIndex);
     }
 
     public void OnMove(InputAction.CallbackContext context)

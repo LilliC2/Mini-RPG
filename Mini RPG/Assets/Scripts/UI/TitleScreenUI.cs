@@ -11,6 +11,7 @@ public class TitleScreenUI : GameBehaviour
     [SerializeField]
     public CombatStyleStats combatStyleStats;
 
+    //use int to cycle through all the options
     int combatStyleCount_P1 = 0;
     int combatStyleCount_P2 = 0;
     int combatStyleCount_P3 = 0;
@@ -74,6 +75,10 @@ public class TitleScreenUI : GameBehaviour
         generatedAlignmentText[playerNum].gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Cycle through different combat styles by incrementing integer
+    /// </summary>
+    /// <param name="playerNum"></param>
     public void CombatStyleNext(int playerNum)
     {
         switch(playerNum)
@@ -106,7 +111,11 @@ public class TitleScreenUI : GameBehaviour
 
 
     }
-    
+
+    /// <summary>
+    /// Cycle through different combat styles by decreasing integer
+    /// </summary>
+    /// <param name="playerNum"></param>
     public void CombatStyleBack(int playerNum)
     {
         switch(playerNum)
@@ -139,12 +148,16 @@ public class TitleScreenUI : GameBehaviour
 
     }
 
+    /// <summary>
+    /// Confirm player is ready and initalise their choices
+    /// </summary>
+    /// <param name="playerNum"></param>
     public void ReadyUp(int playerNum)
     {
         switch (playerNum)
         {
             case 0:
-
+                
                 var P1 = _GM.playerGameObjList[playerNum].GetComponent<PlayerController>();
                 P1.playerInfo.combatStyle = (PlayerClass.CombatStyles)(combatStyleCount_P1);
                 playersReady[playerNum] = true;

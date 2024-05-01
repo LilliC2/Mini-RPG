@@ -50,6 +50,8 @@ MonoBehaviour:
     cooldown: 2
     dmg: 0
     duration: 5
+    range: 0
+    boostValue: 0.25
     manaCost: 3
     rarity: 0
   - name: Shield
@@ -57,20 +59,26 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 3
+    range: 0
+    boostValue: 0.2
     manaCost: 3
     rarity: 0
   - name: Inspire
     description: 'Allies within range gain a temporary attack and defence boost  '
     cooldown: 0
     dmg: 0
-    duration: 0
-    manaCost: 0
+    duration: 3
+    range: 10
+    boostValue: 0.2
+    manaCost: 5
     rarity: 0
   - name: 'Swinging Charge  '
     description: 'Swing your weapon widely and run in a single direction  '
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: "Let \u2018em Rip!  "
@@ -80,6 +88,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: Grand Slam
@@ -88,6 +98,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   priest_AbilityDeck:
@@ -96,6 +108,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -103,6 +117,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Bless
@@ -110,6 +126,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Fireball
@@ -117,6 +135,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Snowball  '
@@ -124,6 +144,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Lighting Bolt  '
@@ -131,6 +153,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Unholy Alliance  '
@@ -139,6 +163,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   mage_AbilityDeck:
@@ -147,6 +173,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -154,6 +182,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Spouting Nonsense  '
@@ -161,6 +191,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Fireball
@@ -168,6 +200,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Snowball  '
@@ -175,6 +209,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Lighting Bolt  '
@@ -182,6 +218,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'A Billion Suns  '
@@ -189,6 +227,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'The Ice Age  '
@@ -196,6 +236,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Zeus Wraith  '
@@ -203,6 +245,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Arrow Barrage  '
@@ -210,6 +254,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Bigger Weapons, Better Person  '
@@ -217,6 +263,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Wind Slice  '
@@ -224,6 +272,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: "Alexandria\u2019s Library  "
@@ -232,6 +282,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   - name: 'Catapult Construct  '
@@ -240,6 +292,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   bard_AbilityDeck:
@@ -248,6 +302,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -255,6 +311,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Inspire
@@ -262,6 +320,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Spouting Nonsense  '
@@ -269,6 +329,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Bigger Weapons, Better Person  '
@@ -276,6 +338,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Front Row Seats  '
@@ -285,6 +349,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Rhythm Heaven  '
@@ -294,6 +360,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Lyre Liar  '
@@ -301,6 +369,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   cleric_AbilityDeck:
@@ -309,6 +379,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -316,6 +388,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Bless
@@ -323,6 +397,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Swinging Charge  '
@@ -330,6 +406,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Deal with the Gods  '
@@ -338,6 +416,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   - name: "Let \u2018em Rip!  "
@@ -347,6 +427,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: Grand Slam
@@ -355,6 +437,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   monk_AbilityDeck:
@@ -363,6 +447,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -370,6 +456,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Fists of Power  '
@@ -377,6 +465,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Open Palm, Closed Mind  '
@@ -384,6 +474,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: Hands
@@ -392,6 +484,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   ranger_AbilityDeck:
@@ -400,6 +494,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
@@ -407,6 +503,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Arrow Barrage  '
@@ -414,6 +512,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Sniper Shot  '
@@ -421,6 +521,8 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Poison Tipped Arrows  '
@@ -429,5 +531,7 @@ MonoBehaviour:
     cooldown: 0
     dmg: 0
     duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
