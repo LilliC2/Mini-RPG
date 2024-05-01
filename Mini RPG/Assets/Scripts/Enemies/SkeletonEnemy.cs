@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using static UnityEngine.GraphicsBuffer;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UIElements;
 
 public class SkeletonEnemy : GameBehaviour
 {
@@ -16,10 +17,13 @@ public class SkeletonEnemy : GameBehaviour
     public UnityEvent<Vector2> OnMovementInput, OnPointerInput;
     public UnityEvent<GameObject> OnAttack;
 
-    public enum CurrentState { Patrol, Chase ,Attack, Dead }
+    public enum CurrentState { Patrol, Chase ,Attack, Orbit, Dead }
+
     public CurrentState currentState;
 
     bool hasAttacked;
+    [SerializeField]
+
     bool hasDestination;
 
     float attackDelay = 1;
@@ -33,6 +37,7 @@ public class SkeletonEnemy : GameBehaviour
 
     NavMeshAgent agent;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +54,7 @@ public class SkeletonEnemy : GameBehaviour
         agent.speed = skeletonStats.movementSpeed;
         currentDestination = SearchWalkPoint();
 
+        InvokeRepeating("ChanceToAttack", 10, Random.Range(5, 20));
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
         healthScript.ApplySlownessEvent.AddListener(ApplySlowness);
@@ -59,29 +65,39 @@ public class SkeletonEnemy : GameBehaviour
     {
         if(currentState != CurrentState.Dead)
         {
-            if (passedTime < attackDelay) passedTime += Time.deltaTime;
 
-            anim.SetFloat("Speed", agent.velocity.magnitude);
+  
+
+			    if (passedTime < attackDelay) passedTime += Time.deltaTime;
+                anim.SetFloat("Speed", agent.velocity.magnitude);
 
             if (targetPlayer != null)
             {
-                if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.visionRange && Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) >= skeletonStats.attackRange)
+                var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
+
+
+                if (distance <= skeletonStats.visionRange && currentState != CurrentState.Orbit && currentState != CurrentState.Attack)
                     currentState = CurrentState.Chase;
-                else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
-                    currentState = CurrentState.Attack;
-                else currentState = CurrentState.Patrol;
+                else if (distance < 5 && currentState != CurrentState.Attack)
+                    currentState = CurrentState.Orbit;
+                //else if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
+                //    currentState = CurrentState.Attack;
+                else if (currentState != CurrentState.Attack) currentState = CurrentState.Patrol;
 
             }
             else currentState = CurrentState.Patrol;
         }
 
 
+        //speed
+        if(currentState == CurrentState.Orbit || currentState == CurrentState.Patrol) agent.speed = 1;
+        else agent.speed = skeletonStats.movementSpeed;
+
 
         switch (currentState)
         {
             case CurrentState.Patrol:
 
-                agent.speed =1;
 
                 if (!hasDestination)
                 {
@@ -97,26 +113,117 @@ public class SkeletonEnemy : GameBehaviour
                 break;
             case CurrentState.Chase:
 
+                hasDestination = false;
                 agent.speed = skeletonStats.movementSpeed;
                 agent.SetDestination(targetPlayer.transform.position);
 
+                if (Vector3.Distance(transform.position, targetPlayer.transform.position) <= 5) currentState = CurrentState.Orbit;
+
                 break;
             case CurrentState.Attack:
-                agent.speed = skeletonStats.movementSpeed;
-                //stop moving
-                agent.SetDestination(transform.position);
 
-                if(passedTime >= attackDelay)
+                //go forwards
+
+                agent.SetDestination(targetPlayer.transform.position);
+
+                if (Vector3.Distance(targetPlayer.transform.position, gameObject.transform.position) <= skeletonStats.attackRange)
                 {
-                    gameObject.transform.LookAt(targetPlayer.transform.position);
-                    print("Attack");
-                    passedTime = 0;
-                    OnAttack?.Invoke(targetPlayer);
+                    //stop moving
+                    agent.SetDestination(transform.position);
+
+                    if (passedTime >= attackDelay)
+                    {
+                        gameObject.transform.LookAt(targetPlayer.transform.position);
+                        print("Attack");
+                        passedTime = 0;
+                        OnAttack?.Invoke(targetPlayer);
+
+                        hasDestination = false;
+                        currentState = CurrentState.Orbit;
+                    }
                 }
 
+
+
+
                 break;
+
+            case CurrentState.Orbit:
+
+                if(targetPlayer == null) FindClosetsPlayer();
+
+                gameObject.transform.LookAt(targetPlayer.transform.position);
+
+                var distance = Vector3.Distance(transform.position, targetPlayer.transform.position);
+                //reach radius of player
+
+
+
+                if (distance < 5 && distance > 1)
+                {
+                    if (!hasDestination)
+                    {
+                        hasDestination = true;
+                        currentDestination = OrbitAroundPlayer();
+                        agent.SetDestination(currentDestination);
+
+                    }
+                }
+                else if(distance > 5) //go towards player
+                {
+                    currentState = CurrentState.Chase;
+
+                }
+                else if (distance < 2) //back away from player
+                {
+                    print("backing up");
+                    agent.SetDestination(transform.position - targetPlayer.transform.position * 3);
+                }
+
+
+                if (agent.velocity.magnitude == 0) hasDestination = false;
+
+                //chance to attack after x seconds
+                
+
+
+            break;
+
             default:
                 break;
+        }
+
+    }
+
+
+    Vector3 OrbitAroundPlayer()
+    {
+        bool foundValidPoint = false;
+        Vector3 orbitPoint = new();
+
+        do
+        {
+            orbitPoint = transform.position + Random.insideUnitSphere * 3;
+
+            if (Vector3.Distance(orbitPoint, targetPlayer.transform.position) > 3 && Vector3.Distance(orbitPoint,gameObject.transform.position) > 1f) 
+                foundValidPoint = true;
+
+
+        } while (!foundValidPoint);
+
+
+
+        return orbitPoint;
+    }
+
+    void ChanceToAttack()   
+    {
+        if(currentState == CurrentState.Orbit) 
+        {
+
+            int r = Random.Range(0, 4);
+            if (r == 1) currentState = CurrentState.Attack;
+
         }
 
     }
@@ -143,8 +250,11 @@ public class SkeletonEnemy : GameBehaviour
         currentState = CurrentState.Dead;
 
         anim.SetTrigger("Die");
-        //ExecuteAfterSeconds(2, ()=> transform.DOScale(0, 0.5f));
-        //ExecuteAfterSeconds(2.5f, () => Destroy(gameObject));
+
+        //anim.enabled = false;
+
+        ExecuteAfterSeconds(1.5f, ()=> transform.DOScale(0, 0.5f));
+        ExecuteAfterSeconds(2f, () => Destroy(gameObject));
     }
 
     /// <summary>
@@ -178,6 +288,22 @@ public class SkeletonEnemy : GameBehaviour
         targetPlayer = closestPlayer;
     }
 
+    #region Status Effects
+
+
+    public void ApplyBurn(float duration, float tickDmg)
+    {
+        StartCoroutine(Burn(duration, tickDmg));
+        ExecuteAfterSeconds(duration, () => StopCoroutine(Burn(duration, tickDmg)));
+    }
+
+    IEnumerator Burn(float duration, float tickDmg)
+    {
+        healthScript.currentHealth -= Mathf.RoundToInt(tickDmg);
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(Burn(duration, tickDmg));
+    }
+
     void ApplyParalysis(float duration)
     {
         agent.isStopped = true;
@@ -196,4 +322,6 @@ public class SkeletonEnemy : GameBehaviour
         ExecuteAfterSeconds(duration, () => agent.speed = speedBeforeSlow);
 
     }
+
+    #endregion
 }
