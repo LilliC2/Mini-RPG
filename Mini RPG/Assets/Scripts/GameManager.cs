@@ -83,7 +83,11 @@ public class GameManager : Singleton<GameManager>
         {
             _UI.titleScreenUI.PlayerJoinedGame(index);
         }
-            if (SceneManager.GetActiveScene().name.Contains("Combat")) _UI.combatUI.DisplayAbilityDecks();
+
+        //testiong
+
+
+        //if (SceneManager.GetActiveScene().name.Contains("Combat")) _UI.combatUI.DisplayAbilityDecks();
 
 
         if (PlayerJoinedGame != null) //check if anything is subscribed

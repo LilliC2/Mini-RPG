@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerAbilities : GameBehaviour
 {
@@ -38,7 +39,7 @@ public class PlayerAbilities : GameBehaviour
 
     bool CheckIfOnCooldown(int abilityNum)
     {
-        print("Checking if ability " + abilityNum + " is on cooldown");
+        //print("Checking if ability " + abilityNum + " is on cooldown");
         bool isOnCooldown = true;
 
         switch (abilityNum) 
@@ -100,11 +101,11 @@ public class PlayerAbilities : GameBehaviour
     }
     public void CallAbility(AbilityCardClass ability, int abilityNumber)
     {
-        if (!CheckIfOnCooldown(abilityNumber))
+        if (!CheckIfOnCooldown(abilityNumber) && ability != null)
         {
             if (!calledAbility)
             {
-                print("Call ability");
+                print("Try Call Ability " + ability.name );
                 calledAbility = true;
                 if (playerControllerScript.playerInfo.currentMana >= ability.manaCost)
                 {
@@ -117,6 +118,10 @@ public class PlayerAbilities : GameBehaviour
 
                         case "Shield":
                             Shield(ability);
+                            break;
+                        case "Swing":
+                            print("Call ability");
+                            SwiningCharge(ability);
                             break;
                         case "Inspire":
                             StartCoroutine(Inspire(ability));
@@ -221,5 +226,29 @@ public class PlayerAbilities : GameBehaviour
 
     }
 
-    
+    void SwiningCharge(AbilityCardClass ability)
+    {
+
+        print("Swinging charge");
+        playerControllerScript.controller.enabled = false;
+
+        playerControllerScript.rb.AddForce(playerControllerScript.transform.forward * 30, ForceMode.Impulse);
+
+        ExecuteAfterSeconds(ability.duration, () => playerControllerScript.controller.enabled = true);
+
+
+    }
+
+    void LetEmRip(AbilityCardClass ability)
+    {
+        print("Swinging charge");
+
+        //temp turning, animation will do it 
+
+        playerControllerScript.controller.enabled = false;
+
+        playerControllerScript.rb.AddForce(playerControllerScript.transform.forward * 20, ForceMode.Impulse);
+
+        ExecuteAfterSeconds(ability.duration, () => playerControllerScript.controller.enabled = true);
+    }
 }

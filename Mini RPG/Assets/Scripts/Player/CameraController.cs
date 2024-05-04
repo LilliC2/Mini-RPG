@@ -49,18 +49,22 @@ public class CameraController : GameBehaviour
         {
             case CameraState.Combat:
 
-                Vector3 position = new();
-
-                foreach (var item in _GM.playerGameObjList)
+                if(_GM.playerGameObjList.Count != 0)
                 {
-                    position += item.transform.position;
+                    Vector3 position = new();
+
+                    foreach (var item in _GM.playerGameObjList)
+                    {
+                        position += item.transform.position;
+                    }
+
+                    position /= _GM.playerGameObjList.Count;
+
+                    gameObject.transform.position = new Vector3(position.x + xAdjustments, yAdjustments, position.z + zAdjustments);
+
+                    //check if players can be seen by camera
                 }
 
-                position /= _GM.playerGameObjList.Count;
-
-                gameObject.transform.position = new Vector3(position.x+ xAdjustments, yAdjustments, position.z+ zAdjustments);
-
-                //check if players can be seen by camera
 
 
                 break;

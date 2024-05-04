@@ -34,13 +34,17 @@ public class PlayerController : GameBehaviour
     Vector3 direction;
     Vector3 lastMovement; //to have player look there
 
-    CharacterController controller;
+    [HideInInspector]
+    public Rigidbody rb;
+    [HideInInspector]
+    public CharacterController controller;
 
     private void Awake()
     {
-        _GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
+        //_GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
 
         playerAbilities = GetComponent<PlayerAbilities>();
+        rb = GetComponent<Rigidbody>();
         healthScript.InitilizeHealth(playerInfo.health, playerInfo.defence);
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
@@ -65,6 +69,15 @@ public class PlayerController : GameBehaviour
 
         selectedAbilityCard = drawnAbilityCards[0];
 
+        _UI.combatUI.DisplayAbilityDecks();
+        //test
+        print("Draw cards");
+
+        playerInfo = _UI.titleScreenUI.combatStyleStats.warrior_stats;
+
+        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.warrior_AbilityDeck;
+
+        DrawAbilityCards();
 
         transform.position = _GM.spawnPoints[playerNum].transform.position;
 
@@ -150,16 +163,15 @@ public class PlayerController : GameBehaviour
 
     public void DrawAbilityCards()
     {
-        print("Draw cards");
-
-        playerInfo = _UI.titleScreenUI.combatStyleStats.warrior_stats;
-
-        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.warrior_AbilityDeck;
-
+        
 
         for (int i = 0; i < 3; i++)
         {
-            drawnAbilityCards[i] = playerInfo.abilityDeck[Random.Range(0, playerInfo.abilityDeck.Length)];
+            print(i);
+            var index = Random.Range(0, playerInfo.abilityDeck.Length);
+            print(index);
+            drawnAbilityCards[i] = playerInfo.abilityDeck[index];
+            print(drawnAbilityCards[i]);
         }
 
         switch (_GM.playerGameObjList.IndexOf(gameObject))

@@ -60,7 +60,7 @@ MonoBehaviour:
     health: 24
     movSpeed: 3
     defence: 5
-    maxMana: 5
+    maxMana: 8
     currentMana: 0
     atkSpd: 0.5
     alignment: 0

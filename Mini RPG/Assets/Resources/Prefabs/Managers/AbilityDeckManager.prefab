@@ -72,14 +72,14 @@ MonoBehaviour:
     boostValue: 0.2
     manaCost: 5
     rarity: 0
-  - name: 'Swinging Charge  '
+  - name: Swing
     description: 'Swing your weapon widely and run in a single direction  '
     cooldown: 0
-    dmg: 0
-    duration: 0
+    dmg: 10
+    duration: 0.2
     range: 0
     boostValue: 0
-    manaCost: 0
+    manaCost: 8
     rarity: 1
   - name: "Let \u2018em Rip!  "
     description: 'Player will temporarily spin in a circle with their weapon, and
