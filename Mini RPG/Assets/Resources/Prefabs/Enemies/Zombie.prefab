@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 6964577552852242741}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4869084801595848311
 MonoBehaviour:
@@ -165,8 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 5
-  maxHealth: 5
-  defence: 0
   OnHitWithRef:
     m_PersistentCalls:
       m_Calls:
@@ -202,6 +200,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ApplySlownessEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  ApplyBurnEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!195 &5504469809196628531

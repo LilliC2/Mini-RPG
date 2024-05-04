@@ -55,6 +55,7 @@ public class ZombieEnemy : GameBehaviour
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
         healthScript.ApplySlownessEvent.AddListener(ApplySlowness);
+        healthScript.ApplyBurnEvent.AddListener(ApplyBurn);
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class ZombieEnemy : GameBehaviour
                     currentState = CurrentState.Chase;
                 else if (distance <= zombieStats.attackRange && currentState != CurrentState.Howl)
                 {
-                    print("enter attack state");
+                    //print("enter attack state");
                     currentState = CurrentState.Attack;
 
                 }
@@ -111,7 +112,7 @@ public class ZombieEnemy : GameBehaviour
                 if (passedTime >= attackDelay)
                 {
                     gameObject.transform.LookAt(targetPlayer.transform.position);
-                    print("Attack");
+                    //print("Attack");
                     passedTime = 0;
                     OnAttack?.Invoke(targetPlayer);
 
@@ -124,7 +125,7 @@ public class ZombieEnemy : GameBehaviour
             case CurrentState.Howl:
                 
                 agent.isStopped = true;
-                print("called howl");
+                //print("called howl");
 
                 if(!hasHowled)
                 {  
@@ -148,7 +149,7 @@ public class ZombieEnemy : GameBehaviour
 
     void ChanceToHowl()
     {
-        print("Chance to howl");
+        //print("Chance to howl");
         if (currentState == CurrentState.Chase)
         {
 

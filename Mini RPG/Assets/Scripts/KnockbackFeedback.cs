@@ -23,7 +23,6 @@ public class KnockbackFeedback : MonoBehaviour
     public void PlayFeedback(GameObject sender)
     {
 
-        print(sender.name);
         StopAllCoroutines();
         OnBegin?.Invoke();
 

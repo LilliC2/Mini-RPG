@@ -73,9 +73,9 @@ public class PlayerController : GameBehaviour
         //test
         print("Draw cards");
 
-        playerInfo = _UI.titleScreenUI.combatStyleStats.warrior_stats;
+        playerInfo = _UI.titleScreenUI.combatStyleStats.mage_stats;
 
-        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.warrior_AbilityDeck;
+        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.mage_AbilityDeck;
 
         DrawAbilityCards();
 

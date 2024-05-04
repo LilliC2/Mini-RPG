@@ -13,6 +13,9 @@ public class PlayerAbilities : GameBehaviour
     bool ability1cooldown = false;
     bool ability2cooldown = false;
 
+    [SerializeField]
+    GameObject fireball_projectile;
+
     private void Awake()
     {
         ability0cooldown = false;
@@ -120,8 +123,10 @@ public class PlayerAbilities : GameBehaviour
                             Shield(ability);
                             break;
                         case "Swing":
-                            print("Call ability");
                             SwiningCharge(ability);
+                            break;
+                        case "Fireball":
+                            Fireball(ability);
                             break;
                         case "Inspire":
                             StartCoroutine(Inspire(ability));
@@ -224,6 +229,14 @@ public class PlayerAbilities : GameBehaviour
         }
 
 
+    }
+
+    void Fireball(AbilityCardClass ability)
+    {
+        var proj = Instantiate(fireball_projectile, playerControllerScript.transform.position, playerControllerScript.transform.rotation);
+        proj.GetComponent<Fireball_Projectile>().dmg = playerControllerScript.playerInfo.attack;
+        proj.GetComponent<Fireball_Projectile>().AddProjForce(playerControllerScript.transform.forward);
+     
     }
 
     void SwiningCharge(AbilityCardClass ability)

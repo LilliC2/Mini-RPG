@@ -30,23 +30,23 @@ public class Health : GameBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.P))
-        {
-            ApplyParalysis(3);
+        //if(Input.GetKeyUp(KeyCode.P))
+        //{
+        //    ApplyParalysis(3);
         
-        }
+        //}
         
-        if(Input.GetKeyUp(KeyCode.B))
-        {
-            ApplyBurn(5,1);
+        //if(Input.GetKeyUp(KeyCode.B))
+        //{
+        //    ApplyBurn(5,1);
         
-        }
+        //}
         
-        if(Input.GetKeyUp(KeyCode.L))
-        {
-            ApplySlowness(3, 0.5f);
+        //if(Input.GetKeyUp(KeyCode.L))
+        //{
+        //    ApplySlowness(3, 0.5f);
         
-        }
+        //}
         
     }
 
@@ -57,6 +57,7 @@ public class Health : GameBehaviour
 
     public void ApplyBurn(float duration, float tickDmg)
     {
+        print("Apply burn in health scrupt");
         ApplyBurnEvent.Invoke(duration, tickDmg);
     }
 
@@ -79,7 +80,6 @@ public class Health : GameBehaviour
         if (sender.layer == gameObject.layer) //not to hit yourself
             return;
 
-        print(amount);
         currentHealth -= amount - defence;
 
         if(currentHealth > 0)
