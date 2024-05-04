@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7044994862189345753}
   - component: {fileID: 3348027905344929732}
   - component: {fileID: -8977396014766439106}
-  - component: {fileID: -8370958083056719911}
+  - component: {fileID: 2823692599071725628}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: Snowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 90159485a0ea30442b73964d4b736b72, type: 2}
+  - {fileID: 2100000, guid: 4e4869726495d6b478113a68ede891e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8370958083056719911
+--- !u!114 &2823692599071725628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7324819468584633748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2341e36cd612818428d12069df9715d9, type: 3}
+  m_Script: {fileID: 11500000, guid: de40481d16b03394181d7fd64a20a6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 0
-  burnDuration: 3
-  burnTickDmg: 1
+  slownessDuration: 3
+  slownessStrength: 0.5

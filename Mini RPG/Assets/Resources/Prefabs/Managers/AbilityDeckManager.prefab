@@ -204,7 +204,7 @@ MonoBehaviour:
     boostValue: 0
     manaCost: 0
     rarity: 0
-  - name: 'Snowball  '
+  - name: Snowball
     description: 'Summon a snowball projectile. Slows enemies.  '
     cooldown: 0
     dmg: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
     boostValue: 0
     manaCost: 0
     rarity: 0
-  - name: 'Lighting Bolt  '
+  - name: Lighting Bolt
     description: 'Summon a lightning projectile. Paralysis enemies.  '
     cooldown: 0
     dmg: 0

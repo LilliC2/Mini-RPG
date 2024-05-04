@@ -215,6 +215,7 @@ public class ZombieEnemy : GameBehaviour
 
     void ApplySlowness(float duration, float strength)
     {
+        print("Apply slowness");
         float speedBeforeSlow = zombieStats.movementSpeed;
 
         agent.speed = zombieStats.movementSpeed * strength;

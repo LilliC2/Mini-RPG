@@ -15,6 +15,10 @@ public class PlayerAbilities : GameBehaviour
 
     [SerializeField]
     GameObject fireball_projectile;
+    [SerializeField]
+    GameObject snowball_projectile;
+    [SerializeField]
+    GameObject lightningBolt_projectile;
 
     private void Awake()
     {
@@ -128,8 +132,17 @@ public class PlayerAbilities : GameBehaviour
                         case "Fireball":
                             Fireball(ability);
                             break;
+                        case "Lighting Bolt":
+                            LightingBolt(ability);
+                            break;
+                        case "Snowball":
+                            Snowball(ability);
+                            break;
                         case "Inspire":
                             StartCoroutine(Inspire(ability));
+                            break;
+                        case "Bless":
+                            StartCoroutine(Bless(ability));
                             break;
 
                     }
@@ -230,6 +243,38 @@ public class PlayerAbilities : GameBehaviour
 
 
     }
+    IEnumerator Bless(AbilityCardClass ability)
+    {
+        tempRangeIndicator.transform.localScale = new Vector3(ability.range, 0.03f, ability.range);
+
+        print("Inspire");
+        //get people in range
+        var collidersInRange = Physics.OverlapSphere(playerControllerScript.gameObject.transform.position, ability.range, _GM.playerMask);
+        List<PlayerController> playerScripts = new List<PlayerController>();
+        List<int> playerDefencePrev = new List<int>();
+        foreach (var collider in collidersInRange)
+        {
+            var playerScript = collider.gameObject.GetComponent<PlayerController>();
+            playerScripts.Add(playerScript);
+            print(collider.name);
+            var playerDefence = playerScript.playerInfo.defence; //speed before increase
+            int defenceIncrease = Mathf.RoundToInt(playerDefence * ability.boostValue);
+            playerDefencePrev.Add(defenceIncrease);
+
+            print("Defence increase " + defenceIncrease);
+            playerScript.playerInfo.defence += defenceIncrease;
+
+        }
+
+        yield return new WaitForSeconds(ability.duration);
+
+        for (int i = 0; i < playerScripts.Count; i++)
+        {
+            playerScripts[i].playerInfo.defence -= playerDefencePrev[i];
+        }
+
+
+    }
 
     void Fireball(AbilityCardClass ability)
     {
@@ -238,6 +283,24 @@ public class PlayerAbilities : GameBehaviour
         proj.GetComponent<Fireball_Projectile>().AddProjForce(playerControllerScript.transform.forward);
      
     }
+    
+    void Snowball(AbilityCardClass ability)
+    {
+        var proj = Instantiate(snowball_projectile, playerControllerScript.transform.position, playerControllerScript.transform.rotation);
+        proj.GetComponent<Snowball_Projectile>().dmg = playerControllerScript.playerInfo.attack;
+        proj.GetComponent<Snowball_Projectile>().AddProjForce(playerControllerScript.transform.forward);
+     
+    }
+    
+    void LightingBolt(AbilityCardClass ability)
+    {
+        var proj = Instantiate(lightningBolt_projectile, playerControllerScript.transform.position, playerControllerScript.transform.rotation);
+        proj.GetComponent<LightingBolt_Projectile>().dmg = playerControllerScript.playerInfo.attack;
+        proj.GetComponent<LightingBolt_Projectile>().AddProjForce(playerControllerScript.transform.forward);
+     
+    }
+
+
 
     void SwiningCharge(AbilityCardClass ability)
     {

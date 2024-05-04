@@ -302,6 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball_projectile: {fileID: 7324819468584633748, guid: 51bc176d4da89d448bd167ac261dc649, type: 3}
+  snowball_projectile: {fileID: 7324819468584633748, guid: 8d2d41da20b417340b108e65d0ff32ce, type: 3}
 --- !u!1 &9048687892979635920
 GameObject:
   m_ObjectHideFlags: 0
