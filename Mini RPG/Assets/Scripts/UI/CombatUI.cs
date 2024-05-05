@@ -27,16 +27,15 @@ public class CombatUI : GameBehaviour
     void Start()
     {
         _GM.event_EnteredCombatScene.AddListener(DisplayAbilityDecks);
-        DisplayAbilityDecks();
     }
 
     public void DisplayAbilityDecks()
     {
-        print("display");
-        if (_GM.playerInputList[0] != null) { abilityDeckGO_P1.SetActive(true); } else abilityDeckGO_P1.SetActive(false);
-        if (_GM.playerInputList[1] != null) { abilityDeckGO_P2.SetActive(true); } else abilityDeckGO_P2.SetActive(false);
-        if (_GM.playerInputList[2] != null) { abilityDeckGO_P3.SetActive(true); } else abilityDeckGO_P3.SetActive(false);
-        if (_GM.playerInputList[3] != null) { abilityDeckGO_P4.SetActive(true); } else abilityDeckGO_P4.SetActive(false);
+
+        if (_GM.playerGameObjList[0] != null) { abilityDeckGO_P1.SetActive(true); } else abilityDeckGO_P1.SetActive(false);
+        //if (_GM.playerGameObjList[1] != null) { abilityDeckGO_P2.SetActive(true); } else abilityDeckGO_P2.SetActive(false);
+        //if (_GM.playerGameObjList[2] != null) { abilityDeckGO_P3.SetActive(true); } else abilityDeckGO_P3.SetActive(false);
+        //if (_GM.playerGameObjList[3] != null) { abilityDeckGO_P4.SetActive(true); } else abilityDeckGO_P4.SetActive(false);
 
     }
 

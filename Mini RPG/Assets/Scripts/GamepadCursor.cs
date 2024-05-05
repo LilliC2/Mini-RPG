@@ -90,7 +90,7 @@ public class GamepadCursor : GameBehaviour
             canvas = FindAnyObjectByType<Canvas>();
         }
 
-        print("create new cursor");
+        //print("create new cursor");
         if (cursorTransform == null)
         {
             cursorTransform = Instantiate(Resources.Load<GameObject>("Prefabs/Mouse"), canvas.transform).GetComponent<RectTransform>();

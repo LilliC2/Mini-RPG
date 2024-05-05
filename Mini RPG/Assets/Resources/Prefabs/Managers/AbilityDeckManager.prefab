@@ -47,171 +47,299 @@ MonoBehaviour:
   warrior_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
-    cooldown: 0
-    manaCost: 0
+    cooldown: 2
+    dmg: 0
+    duration: 5
+    range: 0
+    boostValue: 0.25
+    manaCost: 3
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
-    manaCost: 0
+    dmg: 0
+    duration: 3
+    range: 0
+    boostValue: 0.2
+    manaCost: 3
     rarity: 0
   - name: Inspire
     description: 'Allies within range gain a temporary attack and defence boost  '
     cooldown: 0
-    manaCost: 0
+    dmg: 0
+    duration: 3
+    range: 10
+    boostValue: 0.2
+    manaCost: 5
     rarity: 0
-  - name: 'Swinging Charge  '
+  - name: Swing
     description: 'Swing your weapon widely and run in a single direction  '
     cooldown: 0
-    manaCost: 0
+    dmg: 10
+    duration: 0.2
+    range: 0
+    boostValue: 0
+    manaCost: 8
     rarity: 1
   - name: "Let \u2018em Rip!  "
     description: 'Player will temporarily spin in a circle with their weapon, and
       the player can move during this time. Enemies hit will be knocked back and
       stunned.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: Grand Slam
     description: 'Slam your weapon down to create an AOE shockwave. Enemies hit will
       be temporarily paralised.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   priest_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Bless
     description: Allies within range gain a defence boost.
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Fireball
     description: 'Summon a fireball projectile. Burns enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Snowball  '
     description: 'Summon a snowball projectile. Slows enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Lighting Bolt  '
     description: 'Summon a lightning projectile. Paralysis enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Unholy Alliance  '
     description: 'Summon Cthulhu. He will spawn in the centre of the arena, he cannot
       move but will attack around him for a period of time  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   mage_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Spouting Nonsense  '
     description: 'Curse out the enemies, grant enemies in range a defence debuff.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Fireball
     description: 'Summon a fireball projectile. Burns enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
-  - name: 'Snowball  '
+  - name: Snowball
     description: 'Summon a snowball projectile. Slows enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
-  - name: 'Lighting Bolt  '
+  - name: Lighting Bolt
     description: 'Summon a lightning projectile. Paralysis enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'A Billion Suns  '
     description: 'Summon a huge fireball projectile. Burns enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'The Ice Age  '
     description: 'Summon a huge snowball projectile. Slows enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Zeus Wraith  '
     description: 'Summon a lightning huge projectile. Paralysis enemies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Arrow Barrage  '
     description: 'Select an area for an AOE of arrows to rain down from the sky.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Bigger Weapons, Better Person  '
     description: Increase all party members' weapon size by 100% temporarily.
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Wind Slice  '
     description: 'Cone attack of wind  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: "Alexandria\u2019s Library  "
     description: 'Library domain expansion, books will fly around the area. Enemies
       will take damage when hit.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   - name: 'Catapult Construct  '
     description: 'Magically build a catapult, grab the nearest ally and use them
       as a cannonball. Enemies hit will be stunned.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   bard_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Inspire
     description: 'Allies within range gain a temporary attack and defence boost  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Spouting Nonsense  '
     description: 'Curse out the enemies, grant enemies in range a defence debuff.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Bigger Weapons, Better Person  '
     description: Increase all party members' weapon size by 100% temporarily.
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Front Row Seats  '
@@ -219,6 +347,10 @@ MonoBehaviour:
       long as the player is rocking out. The player will slowly lose mana. The player
       will stop rocking out when they run out of mana or they are hit.   '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Rhythm Heaven  '
@@ -226,38 +358,66 @@ MonoBehaviour:
       move. Depending on their accuracy in the mini game, it will deal damage to
       enemies in range and heal allies.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: 'Lyre Liar  '
     description: 'A cone attack, enemies in range are burnt.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   cleric_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Bless
     description: Allies within range gain a defence boost.
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Swinging Charge  '
     description: 'Swing your weapon widely and run in a single direction  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Deal with the Gods  '
     description: 'Revive any dead players, fully heal and debuff all party members.
       Give all party members a temporary attack boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 3
   - name: "Let \u2018em Rip!  "
@@ -265,65 +425,113 @@ MonoBehaviour:
       the player can move during this time. Enemies hit will be knocked back and
       stunned.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 2
   - name: Grand Slam
     description: 'Slam your weapon down to create an AOE shockwave. Enemies hit will
       be temporarily paralised.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   monk_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Fists of Power  '
     description: 'A cone attack with knockback.   '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Open Palm, Closed Mind  '
     description: 'Gain a strong attack buff.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: Hands
     description: 'All attacks will grant a burn debuff to enemies when hit. This
       effect is temporary.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   ranger_AbilityDeck:
   - name: Dash
     description: 'Gain a temporary speed boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: Shield
     description: 'Gain a temporary defence boost.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Arrow Barrage  '
     description: 'Select an area for an AOE of arrows to rain down from the sky.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 0
   - name: 'Sniper Shot  '
     description: Shoot long range arrow.
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1
   - name: 'Poison Tipped Arrows  '
     description: 'All attacks will grant a poison debuff to enemies when hit. This
       effect is temporary.  '
     cooldown: 0
+    dmg: 0
+    duration: 0
+    range: 0
+    boostValue: 0
     manaCost: 0
     rarity: 1

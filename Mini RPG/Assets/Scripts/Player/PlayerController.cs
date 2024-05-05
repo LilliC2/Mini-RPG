@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,12 +8,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : GameBehaviour
 {
     public PlayerClass playerInfo;
+    public PlayerAbilities playerAbilities;
 
 
     public AbilityCardClass[] drawnAbilityCards;
 
     public AbilityCardClass selectedAbilityCard;
-    [SerializeField] int currentIndex;
+    [SerializeField] int currentAbilityIndex;
     public WeaponClass currentWeapon;
 
     bool buttonCooldown;
@@ -30,14 +32,20 @@ public class PlayerController : GameBehaviour
 
     Animator anim;
     Vector3 movement;
+    Vector3 direction;
     Vector3 lastMovement; //to have player look there
 
-    CharacterController controller;
+    [HideInInspector]
+    public Rigidbody rb;
+    [HideInInspector]
+    public CharacterController controller;
 
     private void Awake()
     {
-        _GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
+        //_GM.event_EnteredCombatScene.AddListener(DrawAbilityCards);
 
+        playerAbilities = GetComponent<PlayerAbilities>();
+        rb = GetComponent<Rigidbody>();
         healthScript.InitilizeHealth(playerInfo.health, playerInfo.defence);
 
         healthScript.ApplyParalysisEvent.AddListener(ApplyParalysis);
@@ -58,10 +66,19 @@ public class PlayerController : GameBehaviour
 
         drawnAbilityCards = new AbilityCardClass[3];
 
-        currentIndex = 0;
+        currentAbilityIndex = 0;
 
         selectedAbilityCard = drawnAbilityCards[0];
 
+        _UI.combatUI.DisplayAbilityDecks();
+        //test
+        print("Draw cards");
+
+        playerInfo = _UI.titleScreenUI.combatStyleStats.mage_stats;
+
+        playerInfo.abilityDeck = _UI.titleScreenUI.abilityDecks.mage_AbilityDeck;
+
+        DrawAbilityCards();
 
         transform.position = _GM.spawnPoints[playerNum].transform.position;
 
@@ -83,7 +100,8 @@ public class PlayerController : GameBehaviour
         }
 
         controller.Move(movement * playerInfo.movSpeed * Time.deltaTime);
-
+        if (transform.localEulerAngles != Vector3.zero) direction = transform.localEulerAngles;
+        if (controller.velocity.magnitude < 1) transform.localEulerAngles = direction;
 
         #region Rotate Player
 
@@ -146,11 +164,15 @@ public class PlayerController : GameBehaviour
 
     public void DrawAbilityCards()
     {
-        print("Draw cards");
+        
 
         for (int i = 0; i < 3; i++)
         {
-            drawnAbilityCards[i] = playerInfo.abilityDeck[Random.Range(0, playerInfo.abilityDeck.Length)];
+            print(i);
+            var index = Random.Range(0, playerInfo.abilityDeck.Length);
+            print(index);
+            drawnAbilityCards[i] = playerInfo.abilityDeck[index];
+            print(drawnAbilityCards[i]);
         }
 
         switch (_GM.playerGameObjList.IndexOf(gameObject))
@@ -165,18 +187,18 @@ public class PlayerController : GameBehaviour
         if (!buttonCooldown)
         {
             buttonCooldown = true;
-            currentIndex += direction;
+            currentAbilityIndex += direction;
 
-            if (currentIndex > 2) { currentIndex = 0; }
-            if (currentIndex < 0) { currentIndex = 2; }
-            print("Current index is " + currentIndex);
+            if (currentAbilityIndex > 2) { currentAbilityIndex = 0; }
+            if (currentAbilityIndex < 0) { currentAbilityIndex = 2; }
+            print("Current index is " + currentAbilityIndex);
 
-            selectedAbilityCard = drawnAbilityCards[currentIndex];
+            selectedAbilityCard = drawnAbilityCards[currentAbilityIndex];
 
 
             ExecuteAfterSeconds(0.5f, () => buttonCooldown = false);
         }
-        _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentIndex);
+        _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentAbilityIndex);
 
 
     }
@@ -192,6 +214,13 @@ public class PlayerController : GameBehaviour
     {
         controls.Gameplay.Disable();
 
+    }
+
+
+    public void OnUseSelectedAbility()
+    {
+
+        playerAbilities.CallAbility(selectedAbilityCard, currentAbilityIndex);
     }
 
     public void OnMove(InputAction.CallbackContext context)

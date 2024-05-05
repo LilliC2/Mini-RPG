@@ -102,6 +102,9 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   mapCounter: 0
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   event_ChangeActionMap:
     m_PersistentCalls:
       m_Calls: []
@@ -117,6 +120,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &5649614842614426067
 MonoBehaviour:
   m_ObjectHideFlags: 0

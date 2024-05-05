@@ -67,6 +67,11 @@ public class PlayerInputHandler : GameBehaviour
         playerControls.Attack(context);
     }
 
+    public void UseAbility()
+    {
+        playerControls.OnUseSelectedAbility();
+    }
+
     public void SelectAbilityCardL()
     {
         playerControls.ChangeSelectedAbility(-1);

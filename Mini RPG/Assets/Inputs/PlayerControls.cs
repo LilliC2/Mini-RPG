@@ -149,7 +149,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+<<<<<<< HEAD
                     ""id"": ""2803f1f9-98fd-4b04-8949-a7607588032f"",
+=======
+                    ""id"": ""5df44828-fc1f-44cc-b3e7-0f8433d0cd0e"",
+>>>>>>> Player-Abilities
                     ""path"": ""<Keyboard>/i"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -165,6 +169,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
+                    ""action"": ""Use Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a313b70d-0061-4e4f-8da6-9854f955ef87"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Use Ability"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

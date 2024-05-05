@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     public InputAction leaveAction;
 
     public int mapCounter; //number of maps the players have traversed
-
+    public LayerMask playerLayerMask;
 
     //events
     public event System.Action<PlayerInput> PlayerJoinedGame;
@@ -33,6 +33,8 @@ public class GameManager : Singleton<GameManager>
 
     //layer masks
     public LayerMask groundMask;
+    public LayerMask playerMask;
+
 
     public void Awake()
     {
@@ -81,7 +83,11 @@ public class GameManager : Singleton<GameManager>
         {
             _UI.titleScreenUI.PlayerJoinedGame(index);
         }
-            if (SceneManager.GetActiveScene().name.Contains("Combat")) _UI.combatUI.DisplayAbilityDecks();
+
+        //testiong
+
+
+        //if (SceneManager.GetActiveScene().name.Contains("Combat")) _UI.combatUI.DisplayAbilityDecks();
 
 
         if (PlayerJoinedGame != null) //check if anything is subscribed

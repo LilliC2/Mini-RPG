@@ -176,7 +176,19 @@ MonoBehaviour:
     m_ActionId: 9d6d0b10-fbf4-45ee-8f5a-808e0317e9b2
     m_ActionName: Gameplay/Interact
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7088768449866971064}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: UseAbility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 64c02a1b-49db-4460-95ca-0933cbf75c36
     m_ActionName: Gameplay/Use Ability
   - m_PersistentCalls:
