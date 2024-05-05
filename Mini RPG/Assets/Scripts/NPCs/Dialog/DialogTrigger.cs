@@ -9,8 +9,6 @@ public class DialogTrigger : GameBehaviour
     GameObject visualCue;
     bool playerInRange = false;
 
-    List<GameObject> playersInRange;
-
     [SerializeField] TextAsset inkJSON;
 
     // Start is called before the first frame update
@@ -23,9 +21,10 @@ public class DialogTrigger : GameBehaviour
     {
         if(playerInRange)
         {
-            foreach (var player in playersInRange)
+            var collidersInRange = Physics.OverlapSphere(gameObject.transform.position, 4, _GM.playerMask);
+            foreach (var player in collidersInRange)
             {
-                var input = player.GetComponent<PlayerController>().controls;
+                var input = player.gameObject.GetComponent<PlayerController>().controls;
                 if(input.Gameplay.Interact.IsPressed())
                 {
                     print("PRESSED");
@@ -40,7 +39,6 @@ public class DialogTrigger : GameBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            playersInRange.Add(other.gameObject);
             playerInRange = true;
         }
     }
@@ -49,8 +47,6 @@ public class DialogTrigger : GameBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playersInRange.Remove(other.gameObject);
-
             playerInRange = false;
         }
     }
