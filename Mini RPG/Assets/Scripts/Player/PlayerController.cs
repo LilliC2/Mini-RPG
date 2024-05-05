@@ -21,7 +21,8 @@ public class PlayerController : GameBehaviour
 
     [SerializeField]
     Health healthScript;
-    PlayerControls controls;
+    [HideInInspector]
+    public PlayerControls controls;
 
     GameObject groundCheck;
 
