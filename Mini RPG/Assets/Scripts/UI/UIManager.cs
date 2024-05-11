@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager>
     public TitleScreenUI titleScreenUI;
     public CombatUI combatUI;
     public OverworldMapUI overworldMapUI;
+    public InventoryUI inventoryUI;
 
     private void Awake()
     {
@@ -73,6 +74,7 @@ public class UIManager : Singleton<UIManager>
         titleScreenUI = FindAnyObjectByType<TitleScreenUI>();
         combatUI = FindAnyObjectByType<CombatUI>();
         overworldMapUI = FindAnyObjectByType<OverworldMapUI>();
+        inventoryUI = FindAnyObjectByType<InventoryUI>();
     }
 
     private void OnEnable()

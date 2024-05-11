@@ -64,9 +64,27 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Use Ability"",
+                    ""name"": ""Use Ability 1"",
                     ""type"": ""Button"",
                     ""id"": ""64c02a1b-49db-4460-95ca-0933cbf75c36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Ability 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cce3999-056b-4d8c-89fd-223532aa5ee5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use Ability 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6e4cf10-63de-467a-8954-628c75660004"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -85,6 +103,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Select Ability Card R"",
                     ""type"": ""Button"",
                     ""id"": ""3d8d6fcf-d2aa-4b9f-b965-1b52fb80d5c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Open Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""cea02de1-be87-469e-ae7b-5b06d5dbc44a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -161,22 +188,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ac911e05-ab3f-4443-8008-2c197f8be617"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
-                    ""action"": ""Use Ability"",
+                    ""action"": ""Use Ability 1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""a313b70d-0061-4e4f-8da6-9854f955ef87"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Use Ability"",
+                    ""action"": ""Use Ability 1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,6 +316,72 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1951c3bf-a4ea-4204-abe8-972ba974d9fc"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Use Ability 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bb15dd92-3f77-4714-afe5-7b4cb0211e29"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Ability 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d9147ec-4299-45f9-84e5-db1390bf1825"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Use Ability 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61770388-933f-4d0e-a565-1731371b1231"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Ability 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0d398d3-a158-4bf1-a67c-f15c0a4537ab"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0050eac-dcbe-468e-93f2-b76cde8d95f5"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -681,9 +774,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
-        m_Gameplay_UseAbility = m_Gameplay.FindAction("Use Ability", throwIfNotFound: true);
+        m_Gameplay_UseAbility1 = m_Gameplay.FindAction("Use Ability 1", throwIfNotFound: true);
+        m_Gameplay_UseAbility2 = m_Gameplay.FindAction("Use Ability 2", throwIfNotFound: true);
+        m_Gameplay_UseAbility3 = m_Gameplay.FindAction("Use Ability 3", throwIfNotFound: true);
         m_Gameplay_SelectAbilityCardL = m_Gameplay.FindAction("Select Ability Card L", throwIfNotFound: true);
         m_Gameplay_SelectAbilityCardR = m_Gameplay.FindAction("Select Ability Card R", throwIfNotFound: true);
+        m_Gameplay_OpenInventory = m_Gameplay.FindAction("Open Inventory", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -763,9 +859,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_Interact;
-    private readonly InputAction m_Gameplay_UseAbility;
+    private readonly InputAction m_Gameplay_UseAbility1;
+    private readonly InputAction m_Gameplay_UseAbility2;
+    private readonly InputAction m_Gameplay_UseAbility3;
     private readonly InputAction m_Gameplay_SelectAbilityCardL;
     private readonly InputAction m_Gameplay_SelectAbilityCardR;
+    private readonly InputAction m_Gameplay_OpenInventory;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -774,9 +873,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
-        public InputAction @UseAbility => m_Wrapper.m_Gameplay_UseAbility;
+        public InputAction @UseAbility1 => m_Wrapper.m_Gameplay_UseAbility1;
+        public InputAction @UseAbility2 => m_Wrapper.m_Gameplay_UseAbility2;
+        public InputAction @UseAbility3 => m_Wrapper.m_Gameplay_UseAbility3;
         public InputAction @SelectAbilityCardL => m_Wrapper.m_Gameplay_SelectAbilityCardL;
         public InputAction @SelectAbilityCardR => m_Wrapper.m_Gameplay_SelectAbilityCardR;
+        public InputAction @OpenInventory => m_Wrapper.m_Gameplay_OpenInventory;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -798,15 +900,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @UseAbility.started += instance.OnUseAbility;
-            @UseAbility.performed += instance.OnUseAbility;
-            @UseAbility.canceled += instance.OnUseAbility;
+            @UseAbility1.started += instance.OnUseAbility1;
+            @UseAbility1.performed += instance.OnUseAbility1;
+            @UseAbility1.canceled += instance.OnUseAbility1;
+            @UseAbility2.started += instance.OnUseAbility2;
+            @UseAbility2.performed += instance.OnUseAbility2;
+            @UseAbility2.canceled += instance.OnUseAbility2;
+            @UseAbility3.started += instance.OnUseAbility3;
+            @UseAbility3.performed += instance.OnUseAbility3;
+            @UseAbility3.canceled += instance.OnUseAbility3;
             @SelectAbilityCardL.started += instance.OnSelectAbilityCardL;
             @SelectAbilityCardL.performed += instance.OnSelectAbilityCardL;
             @SelectAbilityCardL.canceled += instance.OnSelectAbilityCardL;
             @SelectAbilityCardR.started += instance.OnSelectAbilityCardR;
             @SelectAbilityCardR.performed += instance.OnSelectAbilityCardR;
             @SelectAbilityCardR.canceled += instance.OnSelectAbilityCardR;
+            @OpenInventory.started += instance.OnOpenInventory;
+            @OpenInventory.performed += instance.OnOpenInventory;
+            @OpenInventory.canceled += instance.OnOpenInventory;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -823,15 +934,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @UseAbility.started -= instance.OnUseAbility;
-            @UseAbility.performed -= instance.OnUseAbility;
-            @UseAbility.canceled -= instance.OnUseAbility;
+            @UseAbility1.started -= instance.OnUseAbility1;
+            @UseAbility1.performed -= instance.OnUseAbility1;
+            @UseAbility1.canceled -= instance.OnUseAbility1;
+            @UseAbility2.started -= instance.OnUseAbility2;
+            @UseAbility2.performed -= instance.OnUseAbility2;
+            @UseAbility2.canceled -= instance.OnUseAbility2;
+            @UseAbility3.started -= instance.OnUseAbility3;
+            @UseAbility3.performed -= instance.OnUseAbility3;
+            @UseAbility3.canceled -= instance.OnUseAbility3;
             @SelectAbilityCardL.started -= instance.OnSelectAbilityCardL;
             @SelectAbilityCardL.performed -= instance.OnSelectAbilityCardL;
             @SelectAbilityCardL.canceled -= instance.OnSelectAbilityCardL;
             @SelectAbilityCardR.started -= instance.OnSelectAbilityCardR;
             @SelectAbilityCardR.performed -= instance.OnSelectAbilityCardR;
             @SelectAbilityCardR.canceled -= instance.OnSelectAbilityCardR;
+            @OpenInventory.started -= instance.OnOpenInventory;
+            @OpenInventory.performed -= instance.OnOpenInventory;
+            @OpenInventory.canceled -= instance.OnOpenInventory;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -1007,9 +1127,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnUseAbility(InputAction.CallbackContext context);
+        void OnUseAbility1(InputAction.CallbackContext context);
+        void OnUseAbility2(InputAction.CallbackContext context);
+        void OnUseAbility3(InputAction.CallbackContext context);
         void OnSelectAbilityCardL(InputAction.CallbackContext context);
         void OnSelectAbilityCardR(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

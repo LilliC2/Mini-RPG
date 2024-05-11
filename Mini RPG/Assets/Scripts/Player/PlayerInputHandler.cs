@@ -87,6 +87,8 @@ public class PlayerInputHandler : GameBehaviour
         playerControls.OnLook(context);
     }
 
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         switch (_GM.gameState)
