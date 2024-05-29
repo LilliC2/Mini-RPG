@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
@@ -10,6 +11,7 @@ public class PlayerController : GameBehaviour
     public PlayerClass playerInfo;
     public PlayerAbilities playerAbilities;
 
+    [SerializeField] GameObject playerVisualPrefab;
 
     public AbilityCardClass[] drawnAbilityCards;
 
@@ -33,6 +35,7 @@ public class PlayerController : GameBehaviour
     Vector3 movement;
     Vector3 direction;
     Vector3 lastMovement; //to have player look there
+    [SerializeField] float rotateSpeed;
 
     [HideInInspector]
     public Rigidbody rb;
@@ -94,15 +97,22 @@ public class PlayerController : GameBehaviour
         //gravity check
         if(!Physics.CheckSphere(groundCheck.transform.position, 1, _GM.groundMask))
         {
-            movement += Physics.gravity;
+            //movement += Physics.gravity;
 
         }
 
-        controller.Move(movement * playerInfo.movSpeed * Time.deltaTime);
+        //controller.Move(transform.TransformDirection(( movement * playerInfo.movSpeed) * Time.deltaTime));
+
+        transform.Translate(movement * playerInfo.movSpeed * Time.deltaTime, Space.World);
         if (transform.localEulerAngles != Vector3.zero) direction = transform.localEulerAngles;
         if (controller.velocity.magnitude < 1) transform.localEulerAngles = direction;
 
         #region Rotate Player
+        if(movement != Vector3.zero)
+        {
+            Quaternion toRotate = Quaternion.LookRotation(movement, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotate, rotateSpeed * Time.deltaTime);
+        }
 
         #endregion
 
@@ -226,7 +236,6 @@ public class PlayerController : GameBehaviour
     {
         Vector2 move = context.ReadValue<Vector2>();
         movement = new Vector3(move.x, 0, move.y);
-        transform.rotation = Quaternion.LookRotation(movement);
 
     }
 

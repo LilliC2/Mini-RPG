@@ -97,6 +97,7 @@ MonoBehaviour:
     combatStyle: 0
     abilityDeck: []
   playerAbilities: {fileID: 0}
+  playerVisualPrefab: {fileID: 2619780981238505127}
   drawnAbilityCards: []
   selectedAbilityCard:
     name: 
@@ -113,6 +114,7 @@ MonoBehaviour:
     attack: 0
   healthScript: {fileID: -5832780678071855207}
   playerNum: 0
+  rotateSpeed: 500
   rb: {fileID: 0}
   controller: {fileID: 0}
 --- !u!143 &5318215604309306765
@@ -262,7 +264,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -303,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireball_projectile: {fileID: 7324819468584633748, guid: 51bc176d4da89d448bd167ac261dc649, type: 3}
   snowball_projectile: {fileID: 7324819468584633748, guid: 8d2d41da20b417340b108e65d0ff32ce, type: 3}
+  lightningBolt_projectile: {fileID: 0}
 --- !u!1 &9048687892979635920
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +762,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 596675504916823893}
   m_SourcePrefab: {fileID: 100100000, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+--- !u!1 &2619780981238505127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+  m_PrefabInstance: {fileID: 4103979640726758833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2619780981238505303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2066896392038628070, guid: 45288819fde2143449a96207b14db0bb, type: 3}
