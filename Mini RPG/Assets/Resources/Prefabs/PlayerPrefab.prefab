@@ -98,6 +98,7 @@ MonoBehaviour:
     abilityDeck: []
   playerAbilities: {fileID: 0}
   playerVisualPrefab: {fileID: 2619780981238505127}
+  playerNum: 0
   drawnAbilityCards: []
   selectedAbilityCard:
     name: 
@@ -114,7 +115,8 @@ MonoBehaviour:
   currentWeapon:
     attack: 0
   healthScript: {fileID: -5832780678071855207}
-  playerNum: 0
+  numOfClicks: 0
+  stepAmount: 10
   rotateSpeed: 500
   rb: {fileID: 0}
   controller: {fileID: 0}
@@ -780,6 +782,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3459141211467803292}
     - targetCorrespondingSourceObject: {fileID: 2066896392038628070, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2620940390162623989}
@@ -795,6 +800,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
   m_PrefabInstance: {fileID: 4103979640726758833}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3459141211467803292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619780981238505127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eefab7161f15874b9cb4dfc3425cf7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2619780981238505303 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2066896392038628070, guid: 45288819fde2143449a96207b14db0bb, type: 3}

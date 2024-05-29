@@ -8,39 +8,51 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : GameBehaviour
 {
+    [Header("Player Stats")]
+
     public PlayerClass playerInfo;
     public PlayerAbilities playerAbilities;
-
     [SerializeField] GameObject playerVisualPrefab;
+    public int playerNum;
+
+
+    [Header("Abilities")]
 
     public AbilityCardClass[] drawnAbilityCards;
-
     public AbilityCardClass selectedAbilityCard;
-    [SerializeField] int currentAbilityIndex;
-    public WeaponClass currentWeapon;
+
+
+    [Header("Attacks and Weapon")]
 
     bool buttonCooldown;
     bool hasAttacked;
     bool attackIsHeld;
-
+    [SerializeField] int currentAbilityIndex;
+    public WeaponClass currentWeapon;
     [HideInInspector]
     public Health healthScript;
+
+    [Header("Combos")]
+    [SerializeField] int numOfClicks;
+    float comboDelay = 1.2f; //may change this to attack speed
+    float lastClickTime = 0;
+    public float stepAmount;
+
+    [Header("Movement")]
+
     PlayerControls controls;
-
     GameObject groundCheck;
-
-    public int playerNum;
-
     Animator anim;
     Vector3 movement;
     Vector3 direction;
     Vector3 lastMovement; //to have player look there
     [SerializeField] float rotateSpeed;
-
     [HideInInspector]
     public Rigidbody rb;
     [HideInInspector]
     public CharacterController controller;
+
+
 
     private void Awake()
     {
@@ -97,7 +109,7 @@ public class PlayerController : GameBehaviour
         }
 
 
-        anim.SetFloat("WalkSpeed", controller.velocity.magnitude);
+        anim.SetFloat("WalkSpeed", rb.velocity.magnitude);
 
         //gravity check
         if(!Physics.CheckSphere(groundCheck.transform.position, 1, _GM.groundMask))
@@ -122,18 +134,20 @@ public class PlayerController : GameBehaviour
         #endregion
 
         #region Attack
-        if (attackIsHeld)
+
+        if(Time.time - lastClickTime> playerInfo.atkSpd)
         {
-            if (currentWeapon != null)
-            {
-                if (!hasAttacked)
-                {
-                    hasAttacked = true;
-                    anim.SetTrigger("Attack");
-                    ExecuteAfterSeconds(playerInfo.atkSpd, () => hasAttacked = false);
-                }
-            }
+            numOfClicks = 0;
         }
+        if(attackIsHeld)
+        {
+            lastClickTime = Time.time;
+            numOfClicks++;
+            AttackCombos();
+            numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
+        }
+
+
 
 
         #endregion
@@ -141,6 +155,7 @@ public class PlayerController : GameBehaviour
 
     }
 
+    #region Debuff
     void ApplyParalysis(float duration)
     {
         print("Paralysed");
@@ -159,13 +174,42 @@ public class PlayerController : GameBehaviour
         ExecuteAfterSeconds(duration, () => playerInfo.movSpeed = speedBeforeSlow);
 
     }
-
+    #endregion
+    
     public void Attack(InputAction.CallbackContext context)
     {
         if (context.performed) attackIsHeld = true;
         if (context.canceled) attackIsHeld = false;
 
         
+    }
+
+    void AttackCombos()
+    {
+        if (!hasAttacked)
+        {
+            hasAttacked = true;
+            if (numOfClicks == 1)
+            {
+                anim.SetTrigger("Attack1");
+            }
+
+            if (numOfClicks >= 2)
+            {
+                anim.SetTrigger("Attack2");
+
+
+            }
+            if (numOfClicks >= 3)
+            {
+                anim.SetTrigger("Attack3");
+
+            }
+
+            ExecuteAfterSeconds(playerInfo.atkSpd,()=> hasAttacked = false);
+        }
+
+       
     }
 
     public void DestroyPlayer()
