@@ -15,6 +15,8 @@ public class AbilityCardClass
     public float boostValue;
     public int manaCost;
 
+    public Sprite sprite;
+
     public enum Rarity { Common, Uncommon, Rare, Legenardy}
     public Rarity rarity;
 }

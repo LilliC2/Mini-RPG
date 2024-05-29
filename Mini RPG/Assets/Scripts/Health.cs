@@ -7,14 +7,17 @@ public class Health : GameBehaviour
 {
     [SerializeField]
     public int currentHealth;
-        int maxHealth, defence;
+    public int playerIndex;
+    public int maxHealth, defence;
 
     public UnityEvent<GameObject> OnHitWithRef, OnDeathWithRef;
 
     [SerializeField]
     public bool isDead = false;
 
+    bool isPlayer = false;
 
+    PlayerController playerController;
 
     public UnityEvent<float> ApplyParalysisEvent;
     public UnityEvent<float,float> ApplySlownessEvent;
@@ -26,6 +29,12 @@ public class Health : GameBehaviour
         maxHealth = healthValue;
         defence = defenceValue;
         isDead = false;
+        if(gameObject.TryGetComponent<PlayerController>(out PlayerController _playerController))
+        {
+            isPlayer = true;
+            playerIndex = _playerController.playerNum;
+            playerController = _playerController;
+        }
     }
 
     private void Update()
@@ -80,7 +89,11 @@ public class Health : GameBehaviour
         if (sender.layer == gameObject.layer) //not to hit yourself
             return;
 
-        currentHealth -= amount - defence;
+        int dmg = (amount - defence);
+        if (dmg < 0) dmg = 0;
+
+        currentHealth -= dmg;
+        if(isPlayer) { playerController.OnHit(); }
 
         if(currentHealth > 0)
         {

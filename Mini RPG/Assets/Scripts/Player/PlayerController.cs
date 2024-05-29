@@ -23,8 +23,8 @@ public class PlayerController : GameBehaviour
     bool hasAttacked;
     bool attackIsHeld;
 
-    [SerializeField]
-    Health healthScript;
+    [HideInInspector]
+    public Health healthScript;
     PlayerControls controls;
 
     GameObject groundCheck;
@@ -72,7 +72,6 @@ public class PlayerController : GameBehaviour
 
         selectedAbilityCard = drawnAbilityCards[0];
 
-        _UI.combatUI.DisplayAbilityDecks();
         //test
         print("Draw cards");
 
@@ -84,12 +83,18 @@ public class PlayerController : GameBehaviour
 
         transform.position = _GM.spawnPoints[playerNum].transform.position;
 
+        _UI.combatUI.UpdatePlayerHealthMana(playerNum, healthScript.currentHealth, healthScript.maxHealth, playerInfo.currentMana, playerInfo.maxMana);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) { DrawAbilityCards(); }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            _UI.combatUI.UpdatePlayerHealthMana(playerNum, healthScript.currentHealth, healthScript.maxHealth, playerInfo.currentMana, playerInfo.maxMana);
+        }
 
 
         anim.SetFloat("WalkSpeed", controller.velocity.magnitude);
@@ -184,11 +189,11 @@ public class PlayerController : GameBehaviour
             print(drawnAbilityCards[i]);
         }
 
-        switch (_GM.playerGameObjList.IndexOf(gameObject))
-        {
-            case 0:
-                _UI.combatUI.UpdateP1AbilityCards(drawnAbilityCards); break;
-        }
+        //switch (_GM.playerGameObjList.IndexOf(gameObject))
+        //{
+        //    case 0:
+        //        _UI.combatUI.UpdateP1AbilityCards(drawnAbilityCards); break;
+        //}
     }
 
     public void ChangeSelectedAbility(int direction)
@@ -207,8 +212,14 @@ public class PlayerController : GameBehaviour
 
             ExecuteAfterSeconds(0.5f, () => buttonCooldown = false);
         }
-        _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentAbilityIndex);
+       // _UI.combatUI.UpdateSelectedAbilityCard(playerNum, currentAbilityIndex);
 
+
+    }
+
+    public void OnHit()
+    {
+        _UI.combatUI.UpdatePlayerHealthMana(playerNum, healthScript.currentHealth, healthScript.maxHealth, playerInfo.currentMana, playerInfo.maxMana);
 
     }
 

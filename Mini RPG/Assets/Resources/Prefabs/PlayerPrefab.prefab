@@ -86,13 +86,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInfo:
-    attack: 2
-    health: 10
+    attack: 5
+    health: 20
     movSpeed: 3
     defence: 0
-    maxMana: 0
-    currentMana: 0
-    atkSpd: 0
+    maxMana: 10
+    currentMana: 10
+    atkSpd: 0.5
     alignment: 0
     combatStyle: 0
     abilityDeck: []
@@ -108,6 +108,7 @@ MonoBehaviour:
     range: 0
     boostValue: 0
     manaCost: 0
+    sprite: {fileID: 0}
     rarity: 0
   currentAbilityIndex: 0
   currentWeapon:
@@ -168,6 +169,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  playerIndex: 0
+  maxHealth: 0
+  defence: 0
   OnHitWithRef:
     m_PersistentCalls:
       m_Calls:
@@ -183,9 +187,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4658471074399948197}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeathWithRef:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4658471074399948197}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   isDead: 0
   ApplyParalysisEvent:
     m_PersistentCalls:

@@ -36,6 +36,10 @@ public class PlayerAbilities : GameBehaviour
     {
         if(playerControllerScript.playerInfo.currentMana < playerControllerScript.playerInfo.maxMana)
         {
+            _UI.combatUI.UpdatePlayerHealthMana(playerControllerScript.playerNum, playerControllerScript.healthScript.currentHealth,
+                playerControllerScript.healthScript.maxHealth, playerControllerScript.playerInfo.currentMana, 
+                playerControllerScript.playerInfo.maxMana);
+
             playerControllerScript.playerInfo.currentMana += manaRegain;
             if (playerControllerScript.playerInfo.currentMana > playerControllerScript.playerInfo.maxMana) playerControllerScript.playerInfo.currentMana = playerControllerScript.playerInfo.maxMana;
         }
