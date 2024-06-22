@@ -131,7 +131,7 @@ public class ZombieEnemy : GameBehaviour
                 {  
                     hasHowled = true;
                     //animation here
-                    print("HOWL");
+                    //print("HOWL");
                     SummonZombie();
 
                     ExecuteAfterSeconds(5, ()=>hasHowled = false);
@@ -231,7 +231,7 @@ public class ZombieEnemy : GameBehaviour
     {
         if (!hasAttacked)
         {
-            print("ATTACK ZOMVIE");
+            //print("ATTACK ZOMVIE");
             hasAttacked = true;
             anim.SetTrigger("Attack");
             ExecuteAfterSeconds(attackDelay, () => hasAttacked = false);
@@ -263,7 +263,7 @@ public class ZombieEnemy : GameBehaviour
     /// <param name="sender"></param>
     public void ChangeTarget(GameObject sender)
     {
-        print("Change Target");
+        //print("Change Target");
         targetPlayer = sender;
     }
 

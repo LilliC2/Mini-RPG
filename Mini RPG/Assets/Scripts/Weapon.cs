@@ -7,10 +7,14 @@ public class Weapon : GameBehaviour
     public WeaponClass weapon;
     PlayerController player;
 
+    protected AnimationEventHandlerWeapons eventHandler;
+
     private void Start()
     {
         player = transform.root.gameObject.GetComponent<PlayerController>();
     }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {

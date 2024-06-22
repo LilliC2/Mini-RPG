@@ -92,7 +92,7 @@ MonoBehaviour:
     defence: 0
     maxMana: 10
     currentMana: 10
-    atkSpd: 0.5
+    atkSpd: 1
     alignment: 0
     combatStyle: 0
     abilityDeck: []
@@ -115,8 +115,8 @@ MonoBehaviour:
   currentWeapon:
     attack: 0
   healthScript: {fileID: -5832780678071855207}
-  numOfClicks: 0
-  stepAmount: 10
+  currentAttackCount: 0
+  stepAmount: 50
   rotateSpeed: 500
   rb: {fileID: 0}
   controller: {fileID: 0}

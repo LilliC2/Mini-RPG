@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : GameBehaviour
 {
+
+    public enum PlayerState { Attacking, Falling, Idle, Moving}
+    public PlayerState playerStae;
     [Header("Player Stats")]
 
     public PlayerClass playerInfo;
@@ -33,9 +36,9 @@ public class PlayerController : GameBehaviour
     public Health healthScript;
 
     [Header("Combos")]
-    [SerializeField] int numOfClicks;
-    float comboDelay = 1.2f; //may change this to attack speed
-    float lastClickTime = 0;
+
+    public int currentAttackCount;
+
     public float stepAmount;
 
     [Header("Movement")]
@@ -135,16 +138,14 @@ public class PlayerController : GameBehaviour
 
         #region Attack
 
-        if(Time.time - lastClickTime> playerInfo.atkSpd)
+        anim.SetBool("Attacking", attackIsHeld);
+
+        if (attackIsHeld)
         {
-            numOfClicks = 0;
-        }
-        if(attackIsHeld)
-        {
-            lastClickTime = Time.time;
-            numOfClicks++;
+            
             AttackCombos();
-            numOfClicks = Mathf.Clamp(numOfClicks, 0, 3);
+
+
         }
 
 
@@ -181,35 +182,19 @@ public class PlayerController : GameBehaviour
         if (context.performed) attackIsHeld = true;
         if (context.canceled) attackIsHeld = false;
 
-        
     }
 
     void AttackCombos()
     {
-        if (!hasAttacked)
+        if(!hasAttacked)
         {
             hasAttacked = true;
-            if (numOfClicks == 1)
-            {
-                anim.SetTrigger("Attack1");
-            }
 
-            if (numOfClicks >= 2)
-            {
-                anim.SetTrigger("Attack2");
-
-
-            }
-            if (numOfClicks >= 3)
-            {
-                anim.SetTrigger("Attack3");
-
-            }
+            print(currentAttackCount);
 
             ExecuteAfterSeconds(playerInfo.atkSpd,()=> hasAttacked = false);
         }
 
-       
     }
 
     public void DestroyPlayer()
